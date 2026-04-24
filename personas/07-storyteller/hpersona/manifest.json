@@ -19,9 +19,16 @@
   },
   "capability_summary": {
     "personality_tools": [
-      "generate_story"
+      "describe_session_vibe",
+      "build_branching_video_project",
+      "suggest_live_play_examples"
     ],
-    "capabilities": [],
+    "capabilities": [
+      "persona-live-play",
+      "branching-video",
+      "vibe-prompting",
+      "production-readiness-checks"
+    ],
     "mcp_servers_count": 1,
     "a2a_agents_count": 0
   }

@@ -1,4 +1,8 @@
 {
   "schema_version": 1,
-  "capabilities": []
+  "capabilities": [
+    "describe_session_vibe",
+    "build_branching_video_project",
+    "suggest_live_play_examples"
+  ]
 }

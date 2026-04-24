@@ -1,6 +1,6 @@
 {
   "name": "Storyteller",
-  "description": "A narrative companion who creates engaging stories based on prompts.",
+  "description": "Persona live play director for branching AI video sessions with vibe prompts, scenes, choices, and endings.",
   "images": {
     "preview": "preview.webp"
   }
