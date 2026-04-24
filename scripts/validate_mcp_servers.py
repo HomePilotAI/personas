@@ -4,7 +4,7 @@ validate_mcp_servers.py
 
 This script performs a simple validation on the MCP servers contained in the
 `mcp-servers/` directory.  It checks that each server has the expected
-files such as `src/index.js` (or .ts) and `server.json`.  If any check
+files such as `src/index.js` (or .ts/.py) and `server.json`.  If any check
 fails the script exits with a non‑zero status.
 """
 import os
@@ -23,10 +23,13 @@ def main() -> None:
         server_path = os.path.join(SERVERS_DIR, server_dir)
         if not os.path.isdir(server_path):
             continue
+        if not server_dir[:2].isdigit():
+            continue
         index_js = os.path.join(server_path, 'src', 'index.js')
         index_ts = os.path.join(server_path, 'src', 'index.ts')
-        if not (os.path.exists(index_js) or os.path.exists(index_ts)):
-            print(f"Missing index.js or index.ts in {server_path}")
+        index_py = os.path.join(server_path, 'src', 'index.py')
+        if not (os.path.exists(index_js) or os.path.exists(index_ts) or os.path.exists(index_py)):
+            print(f"Missing index.js, index.ts, or index.py in {server_path}")
             success = False
         server_json = os.path.join(server_path, 'server.json')
         if not os.path.exists(server_json):
