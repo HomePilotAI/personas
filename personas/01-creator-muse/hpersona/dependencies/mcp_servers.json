@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "servers": [
+    {
+      "name": "mcp-creator-muse",
+      "description": "MCP server for Creator Muse persona.",
+      "default_port": 9101,
+      "url": "http://localhost:9101",
+      "auth_type": "open",
+      "registry_id": "mcp-creator-muse",
+      "source": {
+        "type": "registry",
+        "registry_id": "mcp-creator-muse"
+      },
+      "transport": "HTTP",
+      "protocol": "MCP",
+      "tools_provided": [
+        "creator_muse_inspire"
+      ]
+    }
+  ]
+}

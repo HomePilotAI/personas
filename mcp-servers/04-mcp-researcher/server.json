@@ -1,0 +1,29 @@
+{
+  "name": "mcp-researcher",
+  "description": "MCP server for Researcher persona.",
+  "default_port": 9104,
+  "protocol": "HTTP",
+  "version": "1.0.0",
+  "tools": [
+    {
+      "name": "search_arxiv",
+      "description": "Searches the arXiv repository."
+    },
+    {
+      "name": "read_paper",
+      "description": "Retrieves and returns paper metadata."
+    },
+    {
+      "name": "summarize_paper",
+      "description": "Summarises a given paper."
+    },
+    {
+      "name": "compare_papers",
+      "description": "Compares multiple papers."
+    },
+    {
+      "name": "build_literature_brief",
+      "description": "Builds a literature brief."
+    }
+  ]
+}

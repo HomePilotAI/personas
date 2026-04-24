@@ -1,0 +1,13 @@
+{
+  "name": "mcp-storyteller",
+  "description": "MCP server for Storyteller persona.",
+  "default_port": 9107,
+  "protocol": "HTTP",
+  "version": "1.0.0",
+  "tools": [
+    {
+      "name": "generate_story",
+      "description": "Generates a story from a prompt."
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Persona MCP Server Dependencies",
+  "type": "object",
+  "properties": {
+    "schema_version": { "type": "integer" },
+    "servers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "default_port": { "type": ["integer", "null"] },
+          "url": { "type": "string" },
+          "auth_type": { "type": "string" },
+          "registry_id": { "type": "string" },
+          "source": {
+            "type": "object",
+            "properties": {
+              "type": { "type": "string" },
+              "registry_id": { "type": "string" }
+            },
+            "required": ["type", "registry_id"]
+          },
+          "transport": { "type": "string" },
+          "protocol": { "type": "string" },
+          "tools_provided": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        },
+        "required": ["name", "description", "url", "auth_type", "registry_id", "source", "transport", "protocol", "tools_provided"]
+      }
+    }
+  },
+  "required": ["schema_version", "servers"]
+}

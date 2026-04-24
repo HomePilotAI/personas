@@ -1,0 +1,13 @@
+{
+  "name": "mcp-general-doctor",
+  "description": "MCP server for General Doctor persona.",
+  "default_port": 9110,
+  "protocol": "HTTP",
+  "version": "1.0.0",
+  "tools": [
+    {
+      "name": "general_health_advice",
+      "description": "Provides general health advice."
+    }
+  ]
+}

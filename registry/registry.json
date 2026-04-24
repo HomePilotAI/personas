@@ -1,0 +1,28 @@
+{
+  "version": "1.0.0",
+  "generated_at": "2026-04-24T00:00:00Z",
+  "personas": [
+    "creator-muse",
+    "style-muse",
+    "secretary-pro",
+    "researcher",
+    "personal-trainer",
+    "room-stylist",
+    "storyteller",
+    "exam-coach",
+    "mindfulness-coach",
+    "general-doctor"
+  ],
+  "mcp_servers": [
+    "mcp-creator-muse",
+    "mcp-style-muse",
+    "mcp-secretary-pro",
+    "mcp-researcher",
+    "mcp-personal-trainer",
+    "mcp-room-stylist",
+    "mcp-storyteller",
+    "mcp-exam-coach",
+    "mcp-mindfulness-coach",
+    "mcp-general-doctor"
+  ]
+}

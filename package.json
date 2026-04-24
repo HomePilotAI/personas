@@ -1,0 +1,16 @@
+{
+  "name": "homepilot-viral-personas",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "mcp-servers/*"
+  ],
+  "scripts": {
+    "install:all": "npm install --workspaces --if-present",
+    "test": "python3 scripts/validate_personas.py && python3 scripts/validate_mcp_servers.py",
+    "build": "echo \"No build step required\""
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

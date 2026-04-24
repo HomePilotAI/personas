@@ -1,0 +1,13 @@
+{
+  "name": "mcp-secretary-pro",
+  "description": "MCP server for Secretary Pro persona.",
+  "default_port": 9103,
+  "protocol": "HTTP",
+  "version": "1.0.0",
+  "tools": [
+    {
+      "name": "manage_schedule",
+      "description": "Manages schedules and reminders."
+    }
+  ]
+}

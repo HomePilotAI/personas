@@ -1,0 +1,13 @@
+const express = require('express');
+const tools = require('./tools').tools;
+const app = express();
+app.use(express.json());
+app.get('/health', (req, res) => res.json({ status: 'ok' }));
+app.get('/tools', (req, res) => res.json({ tools }));
+app.post('/search_arxiv', (req, res) => res.json({ result: 'Tool search_arxiv is not implemented yet.' }));
+app.post('/read_paper', (req, res) => res.json({ result: 'Tool read_paper is not implemented yet.' }));
+app.post('/summarize_paper', (req, res) => res.json({ result: 'Tool summarize_paper is not implemented yet.' }));
+app.post('/compare_papers', (req, res) => res.json({ result: 'Tool compare_papers is not implemented yet.' }));
+app.post('/build_literature_brief', (req, res) => res.json({ result: 'Tool build_literature_brief is not implemented yet.' }));
+const port = process.env.PORT || 9104;
+app.listen(port, () => console.log(`Server listening on port ${port}`));

@@ -1,0 +1,7 @@
+{
+  "name": "Researcher",
+  "description": "A scholarly assistant capable of searching publications, reading papers and summarising findings.",
+  "images": {
+    "preview": "preview.webp"
+  }
+}

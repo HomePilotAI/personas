@@ -1,0 +1,13 @@
+{
+  "name": "mcp-creator-muse",
+  "description": "MCP server for Creator Muse persona.",
+  "default_port": 9101,
+  "protocol": "HTTP",
+  "version": "1.0.0",
+  "tools": [
+    {
+      "name": "creator_muse_inspire",
+      "description": "Generates creative ideas."
+    }
+  ]
+}

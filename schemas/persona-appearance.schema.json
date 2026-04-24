@@ -1,0 +1,10 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Persona Appearance Blueprint",
+  "type": "object",
+  "properties": {
+    "schema_version": { "type": "integer" },
+    "avatar_id": { "type": "string" }
+  },
+  "required": ["schema_version", "avatar_id"]
+}

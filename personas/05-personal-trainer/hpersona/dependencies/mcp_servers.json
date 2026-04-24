@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "servers": [
+    {
+      "name": "mcp-personal-trainer",
+      "description": "MCP server for Personal Trainer persona.",
+      "default_port": 9105,
+      "url": "http://localhost:9105",
+      "auth_type": "open",
+      "registry_id": "mcp-personal-trainer",
+      "source": {
+        "type": "registry",
+        "registry_id": "mcp-personal-trainer"
+      },
+      "transport": "HTTP",
+      "protocol": "MCP",
+      "tools_provided": [
+        "generate_workout_plan"
+      ]
+    }
+  ]
+}

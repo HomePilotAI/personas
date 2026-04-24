@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Gallery Preview Card",
+  "type": "object",
+  "properties": {
+    "name": { "type": "string" },
+    "description": { "type": "string" },
+    "images": {
+      "type": "object",
+      "properties": {
+        "preview": { "type": "string" }
+      },
+      "required": ["preview"]
+    }
+  },
+  "required": ["name", "description", "images"]
+}

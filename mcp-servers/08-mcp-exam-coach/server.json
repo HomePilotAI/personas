@@ -1,0 +1,13 @@
+{
+  "name": "mcp-exam-coach",
+  "description": "MCP server for Exam Coach persona.",
+  "default_port": 9108,
+  "protocol": "HTTP",
+  "version": "1.0.0",
+  "tools": [
+    {
+      "name": "generate_exam_questions",
+      "description": "Generates practice questions."
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "id": "mcp-general-doctor",
+  "name": "mcp-general-doctor",
+  "version": "1.0.0",
+  "file": "mcp-servers/10-mcp-general-doctor/"
+}

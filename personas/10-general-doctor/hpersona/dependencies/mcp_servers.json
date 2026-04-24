@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "servers": [
+    {
+      "name": "mcp-general-doctor",
+      "description": "MCP server for General Doctor persona.",
+      "default_port": 9110,
+      "url": "http://localhost:9110",
+      "auth_type": "open",
+      "registry_id": "mcp-general-doctor",
+      "source": {
+        "type": "registry",
+        "registry_id": "mcp-general-doctor"
+      },
+      "transport": "HTTP",
+      "protocol": "MCP",
+      "tools_provided": [
+        "general_health_advice"
+      ]
+    }
+  ]
+}

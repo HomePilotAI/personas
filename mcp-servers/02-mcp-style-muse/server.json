@@ -1,0 +1,13 @@
+{
+  "name": "mcp-style-muse",
+  "description": "MCP server for Style Muse persona.",
+  "default_port": 9102,
+  "protocol": "HTTP",
+  "version": "1.0.0",
+  "tools": [
+    {
+      "name": "suggest_style",
+      "description": "Suggests style and fashion ideas."
+    }
+  ]
+}

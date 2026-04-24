@@ -1,0 +1,13 @@
+{
+  "name": "mcp-mindfulness-coach",
+  "description": "MCP server for Mindfulness Coach persona.",
+  "default_port": 9109,
+  "protocol": "HTTP",
+  "version": "1.0.0",
+  "tools": [
+    {
+      "name": "lead_meditation",
+      "description": "Leads a meditation session."
+    }
+  ]
+}
