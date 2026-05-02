@@ -1,6 +1,24 @@
 {
   "id": "storyteller",
   "name": "Storyteller",
-  "version": "1.0.0",
-  "file": "packages/storyteller/1.0.0/persona.hpersona"
+  "short": "Live-play director for branching AI video sessions — scenes, choices and endings.",
+  "author": "homepilot-team",
+  "nsfw": false,
+  "tags": [
+    "entertainment",
+    "creative",
+    "roleplay"
+  ],
+  "class_id": "director",
+  "downloads": 0,
+  "submitted_at": "2026-05-02T06:54:22Z",
+  "issue_number": null,
+  "latest": {
+    "version": "1.0.0",
+    "preview_url": "previews/storyteller/1.0.0/preview.webp",
+    "card_url": "previews/storyteller/1.0.0/card.json",
+    "package_url": "packages/storyteller/1.0.0/persona.hpersona",
+    "size_bytes": 0,
+    "submitted_at": "2026-05-02T06:54:22Z"
+  }
 }

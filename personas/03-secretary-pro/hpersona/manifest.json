@@ -3,15 +3,17 @@
   "schema_version": 2,
   "kind": "homepilot.persona",
   "project_type": "persona",
+  "id": "secretary-pro",
+  "version": "1.0.0",
   "source_homepilot_version": "2.1.0",
-  "created_at": "2026-04-24T00:00:00Z",
+  "created_at": "2026-05-02T06:54:22Z",
   "content_rating": "sfw",
   "memory_mode": "adaptive",
   "contents": {
     "has_avatar": true,
     "has_outfits": false,
     "outfit_count": 0,
-    "has_voice": true,
+    "has_voice": false,
     "has_tool_dependencies": true,
     "has_mcp_servers": true,
     "has_a2a_agents": false,
@@ -19,9 +21,17 @@
   },
   "capability_summary": {
     "personality_tools": [
-      "manage_schedule"
+      "secretary_schedule",
+      "secretary_remind",
+      "secretary_triage"
     ],
-    "capabilities": [],
+    "capabilities": [
+      "schedule_orchestration",
+      "reminder_management",
+      "inbox_triage",
+      "meeting_prep",
+      "follow_up_drafting"
+    ],
     "mcp_servers_count": 1,
     "a2a_agents_count": 0
   }

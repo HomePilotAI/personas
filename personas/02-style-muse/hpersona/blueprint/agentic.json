@@ -1,4 +1,10 @@
 {
   "schema_version": 1,
-  "capabilities": []
+  "capabilities": [
+    "outfit_curation",
+    "palette_matching",
+    "before_after_variant",
+    "capsule_planning",
+    "occasion_styling"
+  ]
 }

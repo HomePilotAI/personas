@@ -1,6 +1,8 @@
 {
   "schema_version": 1,
   "tools": [
-    "suggest_room_decor"
+    "room_layout",
+    "room_palette",
+    "room_shopping_list"
   ]
 }

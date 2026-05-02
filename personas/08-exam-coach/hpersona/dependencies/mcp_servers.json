@@ -3,7 +3,7 @@
   "servers": [
     {
       "name": "mcp-exam-coach",
-      "description": "MCP server for Exam Coach persona.",
+      "description": "MCP server for the Exam Coach persona.",
       "default_port": 9108,
       "url": "http://localhost:9108",
       "auth_type": "open",
@@ -14,8 +14,12 @@
       },
       "transport": "HTTP",
       "protocol": "MCP",
+      "health_endpoint": "/health",
+      "tools_endpoint": "/tools",
       "tools_provided": [
-        "generate_exam_questions"
+        "exam_question",
+        "exam_plan",
+        "exam_explain"
       ]
     }
   ]

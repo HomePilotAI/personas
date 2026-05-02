@@ -1,4 +1,11 @@
 {
   "schema_version": 1,
-  "avatar_id": "avatar_style-muse.png"
+  "avatar_id": "avatar_style-muse.png",
+  "thumb_id": "thumb_avatar_style-muse.webp",
+  "palette": [
+    "#f472b6",
+    "#a78bfa",
+    "#22d3ee"
+  ],
+  "emoji": "👗"
 }

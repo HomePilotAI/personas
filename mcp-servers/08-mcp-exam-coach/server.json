@@ -1,13 +1,25 @@
 {
   "name": "mcp-exam-coach",
-  "description": "MCP server for Exam Coach persona.",
+  "description": "MCP server for the Exam Coach persona.",
   "default_port": 9108,
   "protocol": "HTTP",
+  "transport": "HTTP",
   "version": "1.0.0",
+  "health_endpoint": "/health",
+  "tools_endpoint": "/tools",
+  "auth_type": "open",
   "tools": [
     {
-      "name": "generate_exam_questions",
-      "description": "Generates practice questions."
+      "name": "exam_question",
+      "description": "Authors practice questions with explanations."
+    },
+    {
+      "name": "exam_plan",
+      "description": "Builds a spaced-repetition study plan."
+    },
+    {
+      "name": "exam_explain",
+      "description": "Explains a concept at requested difficulty."
     }
   ]
 }

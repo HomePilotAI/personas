@@ -1,21 +1,25 @@
 {
   "name": "mcp-storyteller",
-  "description": "Production-ready MCP server for persona-centered live play and branching AI video sessions.",
+  "description": "MCP server for the Storyteller persona.",
   "default_port": 9107,
   "protocol": "HTTP",
-  "version": "1.1.0",
+  "transport": "HTTP",
+  "version": "1.0.0",
+  "health_endpoint": "/health",
+  "tools_endpoint": "/tools",
+  "auth_type": "open",
   "tools": [
     {
-      "name": "describe_session_vibe",
-      "description": "Creates a short vibe prompt for a live play session."
+      "name": "story_scene",
+      "description": "Generates the next scene with beats."
     },
     {
-      "name": "build_branching_video_project",
-      "description": "Builds a branching AI video project with scenes, choices, and endings."
+      "name": "story_choice",
+      "description": "Drafts player choices."
     },
     {
-      "name": "suggest_live_play_examples",
-      "description": "Returns high-performing examples for persona-centered sessions."
+      "name": "story_ending",
+      "description": "Resolves the branch into an ending."
     }
   ]
 }

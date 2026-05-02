@@ -1,4 +1,10 @@
 {
   "schema_version": 1,
-  "capabilities": []
+  "capabilities": [
+    "ideation:short_form_video",
+    "hook_writing",
+    "caption_drafting",
+    "carousel_outline",
+    "trend_pattern_matching"
+  ]
 }

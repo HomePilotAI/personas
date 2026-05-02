@@ -1,4 +1,10 @@
 {
   "schema_version": 1,
-  "capabilities": []
+  "capabilities": [
+    "guided_meditation",
+    "grounding_exercise",
+    "focus_session",
+    "breath_scripting",
+    "stress_reflection"
+  ]
 }

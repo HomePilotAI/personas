@@ -1,6 +1,23 @@
 {
   "id": "room-stylist",
   "name": "Room Stylist",
-  "version": "1.0.0",
-  "file": "packages/room-stylist/1.0.0/persona.hpersona"
+  "short": "Interior designer who lays out rooms, picks palettes and curates shoppable looks.",
+  "author": "homepilot-team",
+  "nsfw": false,
+  "tags": [
+    "lifestyle",
+    "creative"
+  ],
+  "class_id": "designer",
+  "downloads": 0,
+  "submitted_at": "2026-05-02T06:54:22Z",
+  "issue_number": null,
+  "latest": {
+    "version": "1.0.0",
+    "preview_url": "previews/room-stylist/1.0.0/preview.webp",
+    "card_url": "previews/room-stylist/1.0.0/card.json",
+    "package_url": "packages/room-stylist/1.0.0/persona.hpersona",
+    "size_bytes": 0,
+    "submitted_at": "2026-05-02T06:54:22Z"
+  }
 }

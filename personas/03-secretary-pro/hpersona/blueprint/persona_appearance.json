@@ -1,4 +1,11 @@
 {
   "schema_version": 1,
-  "avatar_id": "avatar_secretary-pro.png"
+  "avatar_id": "avatar_secretary-pro.png",
+  "thumb_id": "thumb_avatar_secretary-pro.webp",
+  "palette": [
+    "#3b82f6",
+    "#06b6d4",
+    "#1e293b"
+  ],
+  "emoji": "🗂️"
 }

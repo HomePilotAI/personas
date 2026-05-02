@@ -1,4 +1,10 @@
 {
   "schema_version": 1,
-  "capabilities": []
+  "capabilities": [
+    "literature_search",
+    "paper_summary",
+    "citation_management",
+    "research_brief",
+    "evidence_grading"
+  ]
 }

@@ -1,29 +1,80 @@
-# HomePilot  Personas Pack
+# HomePilot Personas Pack
 
-This repository contains a suite of **essential personas** and their associated external MCP servers for the HomePilot project.  Each persona is packaged according to the HomePilot `.hpersona` v2 format and includes blueprint definitions, dependency declarations, assets and preview metadata.  The goal of these personas is to showcase how different personality types can be built and shared via HomePilot while adhering to the latest package schema and external server contract.
+This repository contains 10 production-ready **essential personas** for the
+HomePilot project plus their external MCP servers. Each persona is packaged
+according to the `.hpersona` v2 format, ships an enriched gallery card,
+generated avatars and a CI-built distributable zip ready to publish to
+[https://ruslanmv.com/HomePilot/gallery.html](https://ruslanmv.com/HomePilot/gallery.html).
+
+## The 10 personas
+
+| ID | Name | Role | Class |
+|---|---|---|---|
+| `creator-muse` | Creator Muse | Content Creator's Sidekick | muse |
+| `style-muse` | Style Muse | Personal Style Curator | stylist |
+| `secretary-pro` | Secretary Pro | Executive Secretary | secretary |
+| `researcher` | Researcher | Scholarly Research Assistant | scholar |
+| `personal-trainer` | Personal Trainer | Strength & Conditioning Coach | coach |
+| `room-stylist` | Room Stylist | Interior Design Consultant | designer |
+| `storyteller` | Storyteller | Branching Live-Play Director | director |
+| `exam-coach` | Exam Coach | Study & Exam Preparation Coach | tutor |
+| `mindfulness-coach` | Mindfulness Coach | Mindfulness Guide | coach |
+| `general-doctor` | General Doctor | Health Information Companion | advisor |
 
 ## Repository structure
 
-- **`personas/`** – Source directories for each persona.  Inside each persona folder you will find a `hpersona/` directory with the package contents and a `gallery/` directory with preview assets and registry entries.
-- **`mcp-servers/`** – External MCP servers that provide additional capabilities for each persona.  These are minimal Express applications exposing health and tool endpoints.
-- **`packages/`** – Shared libraries and tooling used for building and validating persona packages.  These include the hpersona builder, an MCP server core, persona‑shared helpers and gallery tools.
-- **`schemas/`** – JSON schemas used to validate the structure of manifests, blueprints, dependencies and preview cards.
-- **`scripts/`** – Helper scripts for validating and building personas.  These scripts are invoked from npm scripts and the Makefile.
-- **`docs/`** – Documentation describing the architecture, persona format, server contract, publishing workflow and strategy for making personas go viral.
-- **`dist/`** – Built artifacts.  When you run the build scripts, generated `.hpersona` packages and gallery previews are placed under this folder.
-- **`registry/`** – Registry metadata for personas and MCP servers.  After building, the registry files are used to publish packages to the HomePilot community gallery.
+- **`personas/`** — One folder per persona with `hpersona/` (package
+  contents) and `gallery/` (preview asset + registry entry).
+- **`mcp-servers/`** — External MCP servers (`/health` + `/tools`) backing
+  each persona.
+- **`packages/`** — Shared libraries and tooling.
+- **`schemas/`** — JSON schemas for manifests, blueprints and cards.
+- **`scripts/`** — Generators and validators (asset, metadata, package, CI).
+- **`docs/`** — Architecture, hpersona spec, MCP contract, gallery publishing.
+- **`dist/`** — CI build output. `dist/packages/<id>/<version>/persona.hpersona`
+  and `dist/previews/<id>/<version>/{preview.webp,card.json}`.
+- **`registry/`** — Registry metadata; `registry.json` is in the gallery
+  `items[]` shape consumed by `docs/gallery.js`.
 
-## Getting started
-
-To install dependencies and run the validation scripts you can use the Makefile:
+## Pipeline
 
 ```sh
-make install
-make test
+make install        # Pillow + Node deps
+make assets         # render avatars, previews, thumbnails
+make metadata       # rebuild card.json, manifests, blueprints, registry entries
+make package        # zip into dist/packages/<id>/<version>/persona.hpersona
+make validate       # production-readiness checks (must pass)
+make all            # assets + metadata + package + validate
 ```
 
-The `install` target will install Node dependencies for the root and workspace packages, while the `test` target will run simple validation scripts to ensure the persona and MCP server directories are present and contain the expected files.
+The same pipeline runs in CI via `.github/workflows/build-personas.yml` and
+uploads the `dist/` artifact for gallery publishing.
 
-To build the personas into `.hpersona` packages for distribution you would normally run the build scripts under the `scripts/` folder.  These have been stubbed out in this repository and can be extended to perform actual packaging.
+## Authoring a new persona
 
-For more details on the package format and design considerations please consult the documents in the `docs/` directory.
+1. Append a new entry to `scripts/persona_data.py`.
+2. Add a numbered persona folder and a sibling MCP server folder.
+3. Run `make all`. Generators write everything else.
+
+## Compatibility with HomePilot Gallery
+
+Each persona's `gallery/registry-entry.json` and the top-level
+`registry/registry.json` follow the gallery item contract from
+`ruslanmv/HomePilot/docs/gallery.js`:
+
+```json
+{
+  "id": "...", "name": "...", "short": "...", "author": "...",
+  "nsfw": false, "tags": ["..."], "class_id": "...",
+  "latest": {
+    "version": "1.0.0",
+    "preview_url": "previews/<id>/1.0.0/preview.webp",
+    "card_url":    "previews/<id>/1.0.0/card.json",
+    "package_url": "packages/<id>/1.0.0/persona.hpersona",
+    "size_bytes":  123456
+  }
+}
+```
+
+The enriched `preview/card.json` populates the gallery's MMORPG-style
+character sheet (stats, style/tone tags, tools, backstory).

@@ -1,4 +1,10 @@
 {
   "schema_version": 1,
-  "capabilities": []
+  "capabilities": [
+    "study_plan_generation",
+    "practice_question_authoring",
+    "spaced_repetition_scheduling",
+    "concept_explanation",
+    "difficulty_adaptation"
+  ]
 }

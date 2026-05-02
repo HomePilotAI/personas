@@ -1,8 +1,10 @@
 {
   "schema_version": 1,
   "capabilities": [
-    "describe_session_vibe",
-    "build_branching_video_project",
-    "suggest_live_play_examples"
+    "branching_narrative",
+    "scene_direction",
+    "choice_design",
+    "ending_resolution",
+    "vibe_prompt_translation"
   ]
 }

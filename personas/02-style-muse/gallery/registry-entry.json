@@ -1,6 +1,23 @@
 {
   "id": "style-muse",
   "name": "Style Muse",
-  "version": "1.0.0",
-  "file": "packages/style-muse/1.0.0/persona.hpersona"
+  "short": "Personal stylist who curates outfits, palettes and before/after looks.",
+  "author": "homepilot-team",
+  "nsfw": false,
+  "tags": [
+    "lifestyle",
+    "creative"
+  ],
+  "class_id": "stylist",
+  "downloads": 0,
+  "submitted_at": "2026-05-02T06:54:22Z",
+  "issue_number": null,
+  "latest": {
+    "version": "1.0.0",
+    "preview_url": "previews/style-muse/1.0.0/preview.webp",
+    "card_url": "previews/style-muse/1.0.0/card.json",
+    "package_url": "packages/style-muse/1.0.0/persona.hpersona",
+    "size_bytes": 0,
+    "submitted_at": "2026-05-02T06:54:22Z"
+  }
 }

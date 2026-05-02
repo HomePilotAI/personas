@@ -1,4 +1,10 @@
 {
   "schema_version": 1,
-  "capabilities": []
+  "capabilities": [
+    "workout_programming",
+    "recovery_tracking",
+    "streak_management",
+    "progression_regression",
+    "warmup_prescription"
+  ]
 }

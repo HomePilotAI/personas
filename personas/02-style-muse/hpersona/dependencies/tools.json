@@ -1,6 +1,7 @@
 {
   "schema_version": 1,
   "tools": [
-    "suggest_style"
+    "style_muse_outfit",
+    "style_muse_variant"
   ]
 }

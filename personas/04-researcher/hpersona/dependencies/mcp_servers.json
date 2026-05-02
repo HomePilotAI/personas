@@ -3,7 +3,7 @@
   "servers": [
     {
       "name": "mcp-researcher",
-      "description": "MCP server for Researcher persona.",
+      "description": "MCP server for the Researcher persona.",
       "default_port": 9104,
       "url": "http://localhost:9104",
       "auth_type": "open",
@@ -14,12 +14,12 @@
       },
       "transport": "HTTP",
       "protocol": "MCP",
+      "health_endpoint": "/health",
+      "tools_endpoint": "/tools",
       "tools_provided": [
-        "search_arxiv",
-        "read_paper",
-        "summarize_paper",
-        "compare_papers",
-        "build_literature_brief"
+        "researcher_search",
+        "researcher_summarize",
+        "researcher_brief"
       ]
     }
   ]

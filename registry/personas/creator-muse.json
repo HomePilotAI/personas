@@ -1,6 +1,24 @@
 {
   "id": "creator-muse",
   "name": "Creator Muse",
-  "version": "1.0.0",
-  "file": "packages/creator-muse/1.0.0/persona.hpersona"
+  "short": "Brainstorming muse for reels, carousels and viral hooks — never out of ideas.",
+  "author": "homepilot-team",
+  "nsfw": false,
+  "tags": [
+    "creative",
+    "productivity",
+    "entertainment"
+  ],
+  "class_id": "muse",
+  "downloads": 0,
+  "submitted_at": "2026-05-02T06:54:22Z",
+  "issue_number": null,
+  "latest": {
+    "version": "1.0.0",
+    "preview_url": "previews/creator-muse/1.0.0/preview.webp",
+    "card_url": "previews/creator-muse/1.0.0/card.json",
+    "package_url": "packages/creator-muse/1.0.0/persona.hpersona",
+    "size_bytes": 421311,
+    "submitted_at": "2026-05-02T06:54:22Z"
+  }
 }

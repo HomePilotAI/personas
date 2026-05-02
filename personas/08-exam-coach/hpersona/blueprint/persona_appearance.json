@@ -1,4 +1,11 @@
 {
   "schema_version": 1,
-  "avatar_id": "avatar_exam-coach.png"
+  "avatar_id": "avatar_exam-coach.png",
+  "thumb_id": "thumb_avatar_exam-coach.webp",
+  "palette": [
+    "#6366f1",
+    "#3b82f6",
+    "#1e293b"
+  ],
+  "emoji": "🎓"
 }

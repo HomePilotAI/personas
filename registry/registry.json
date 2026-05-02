@@ -1,6 +1,239 @@
 {
   "version": "1.0.0",
-  "generated_at": "2026-04-24T00:00:00Z",
+  "generated_at": "2026-05-02T06:54:22Z",
+  "items": [
+    {
+      "id": "creator-muse",
+      "name": "Creator Muse",
+      "short": "Brainstorming muse for reels, carousels and viral hooks — never out of ideas.",
+      "author": "homepilot-team",
+      "nsfw": false,
+      "tags": [
+        "creative",
+        "productivity",
+        "entertainment"
+      ],
+      "class_id": "muse",
+      "downloads": 0,
+      "submitted_at": "2026-05-02T06:54:22Z",
+      "issue_number": null,
+      "latest": {
+        "version": "1.0.0",
+        "preview_url": "previews/creator-muse/1.0.0/preview.webp",
+        "card_url": "previews/creator-muse/1.0.0/card.json",
+        "package_url": "packages/creator-muse/1.0.0/persona.hpersona",
+        "size_bytes": 421311,
+        "submitted_at": "2026-05-02T06:54:22Z"
+      }
+    },
+    {
+      "id": "style-muse",
+      "name": "Style Muse",
+      "short": "Personal stylist who curates outfits, palettes and before/after looks.",
+      "author": "homepilot-team",
+      "nsfw": false,
+      "tags": [
+        "lifestyle",
+        "creative"
+      ],
+      "class_id": "stylist",
+      "downloads": 0,
+      "submitted_at": "2026-05-02T06:54:22Z",
+      "issue_number": null,
+      "latest": {
+        "version": "1.0.0",
+        "preview_url": "previews/style-muse/1.0.0/preview.webp",
+        "card_url": "previews/style-muse/1.0.0/card.json",
+        "package_url": "packages/style-muse/1.0.0/persona.hpersona",
+        "size_bytes": 422958,
+        "submitted_at": "2026-05-02T06:54:22Z"
+      }
+    },
+    {
+      "id": "secretary-pro",
+      "name": "Secretary Pro",
+      "short": "Executive secretary — schedules, reminders and inbox triage, two steps ahead.",
+      "author": "homepilot-team",
+      "nsfw": false,
+      "tags": [
+        "professional",
+        "productivity"
+      ],
+      "class_id": "secretary",
+      "downloads": 0,
+      "submitted_at": "2026-05-02T06:54:22Z",
+      "issue_number": null,
+      "latest": {
+        "version": "1.0.0",
+        "preview_url": "previews/secretary-pro/1.0.0/preview.webp",
+        "card_url": "previews/secretary-pro/1.0.0/card.json",
+        "package_url": "packages/secretary-pro/1.0.0/persona.hpersona",
+        "size_bytes": 377831,
+        "submitted_at": "2026-05-02T06:54:22Z"
+      }
+    },
+    {
+      "id": "researcher",
+      "name": "Researcher",
+      "short": "Scholarly assistant who finds papers, extracts findings and cites sources.",
+      "author": "homepilot-team",
+      "nsfw": false,
+      "tags": [
+        "research",
+        "professional"
+      ],
+      "class_id": "scholar",
+      "downloads": 0,
+      "submitted_at": "2026-05-02T06:54:22Z",
+      "issue_number": null,
+      "latest": {
+        "version": "1.0.0",
+        "preview_url": "previews/researcher/1.0.0/preview.webp",
+        "card_url": "previews/researcher/1.0.0/card.json",
+        "package_url": "packages/researcher/1.0.0/persona.hpersona",
+        "size_bytes": 373193,
+        "submitted_at": "2026-05-02T06:54:22Z"
+      }
+    },
+    {
+      "id": "personal-trainer",
+      "name": "Personal Trainer",
+      "short": "Coach who programs workouts, tracks recovery and keeps your streak alive.",
+      "author": "homepilot-team",
+      "nsfw": false,
+      "tags": [
+        "lifestyle",
+        "productivity"
+      ],
+      "class_id": "coach",
+      "downloads": 0,
+      "submitted_at": "2026-05-02T06:54:22Z",
+      "issue_number": null,
+      "latest": {
+        "version": "1.0.0",
+        "preview_url": "previews/personal-trainer/1.0.0/preview.webp",
+        "card_url": "previews/personal-trainer/1.0.0/card.json",
+        "package_url": "packages/personal-trainer/1.0.0/persona.hpersona",
+        "size_bytes": 347074,
+        "submitted_at": "2026-05-02T06:54:22Z"
+      }
+    },
+    {
+      "id": "room-stylist",
+      "name": "Room Stylist",
+      "short": "Interior designer who lays out rooms, picks palettes and curates shoppable looks.",
+      "author": "homepilot-team",
+      "nsfw": false,
+      "tags": [
+        "lifestyle",
+        "creative"
+      ],
+      "class_id": "designer",
+      "downloads": 0,
+      "submitted_at": "2026-05-02T06:54:22Z",
+      "issue_number": null,
+      "latest": {
+        "version": "1.0.0",
+        "preview_url": "previews/room-stylist/1.0.0/preview.webp",
+        "card_url": "previews/room-stylist/1.0.0/card.json",
+        "package_url": "packages/room-stylist/1.0.0/persona.hpersona",
+        "size_bytes": 351325,
+        "submitted_at": "2026-05-02T06:54:22Z"
+      }
+    },
+    {
+      "id": "storyteller",
+      "name": "Storyteller",
+      "short": "Live-play director for branching AI video sessions — scenes, choices and endings.",
+      "author": "homepilot-team",
+      "nsfw": false,
+      "tags": [
+        "entertainment",
+        "creative",
+        "roleplay"
+      ],
+      "class_id": "director",
+      "downloads": 0,
+      "submitted_at": "2026-05-02T06:54:22Z",
+      "issue_number": null,
+      "latest": {
+        "version": "1.0.0",
+        "preview_url": "previews/storyteller/1.0.0/preview.webp",
+        "card_url": "previews/storyteller/1.0.0/card.json",
+        "package_url": "packages/storyteller/1.0.0/persona.hpersona",
+        "size_bytes": 410827,
+        "submitted_at": "2026-05-02T06:54:22Z"
+      }
+    },
+    {
+      "id": "exam-coach",
+      "name": "Exam Coach",
+      "short": "Exam coach who builds study plans, drills topics and writes practice questions.",
+      "author": "homepilot-team",
+      "nsfw": false,
+      "tags": [
+        "productivity",
+        "research"
+      ],
+      "class_id": "tutor",
+      "downloads": 0,
+      "submitted_at": "2026-05-02T06:54:22Z",
+      "issue_number": null,
+      "latest": {
+        "version": "1.0.0",
+        "preview_url": "previews/exam-coach/1.0.0/preview.webp",
+        "card_url": "previews/exam-coach/1.0.0/card.json",
+        "package_url": "packages/exam-coach/1.0.0/persona.hpersona",
+        "size_bytes": 377048,
+        "submitted_at": "2026-05-02T06:54:22Z"
+      }
+    },
+    {
+      "id": "mindfulness-coach",
+      "name": "Mindfulness Coach",
+      "short": "Gentle mindfulness guide — meditation scripts, grounding and stress relief.",
+      "author": "homepilot-team",
+      "nsfw": false,
+      "tags": [
+        "lifestyle"
+      ],
+      "class_id": "coach",
+      "downloads": 0,
+      "submitted_at": "2026-05-02T06:54:22Z",
+      "issue_number": null,
+      "latest": {
+        "version": "1.0.0",
+        "preview_url": "previews/mindfulness-coach/1.0.0/preview.webp",
+        "card_url": "previews/mindfulness-coach/1.0.0/card.json",
+        "package_url": "packages/mindfulness-coach/1.0.0/persona.hpersona",
+        "size_bytes": 423712,
+        "submitted_at": "2026-05-02T06:54:22Z"
+      }
+    },
+    {
+      "id": "general-doctor",
+      "name": "General Doctor",
+      "short": "General health information companion — non-diagnostic wellness guidance.",
+      "author": "homepilot-team",
+      "nsfw": false,
+      "tags": [
+        "lifestyle",
+        "professional"
+      ],
+      "class_id": "advisor",
+      "downloads": 0,
+      "submitted_at": "2026-05-02T06:54:22Z",
+      "issue_number": null,
+      "latest": {
+        "version": "1.0.0",
+        "preview_url": "previews/general-doctor/1.0.0/preview.webp",
+        "card_url": "previews/general-doctor/1.0.0/card.json",
+        "package_url": "packages/general-doctor/1.0.0/persona.hpersona",
+        "size_bytes": 376858,
+        "submitted_at": "2026-05-02T06:54:22Z"
+      }
+    }
+  ],
   "personas": [
     "creator-muse",
     "style-muse",

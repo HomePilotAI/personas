@@ -1,6 +1,8 @@
 {
   "schema_version": 1,
   "tools": [
-    "generate_exam_questions"
+    "exam_question",
+    "exam_plan",
+    "exam_explain"
   ]
 }

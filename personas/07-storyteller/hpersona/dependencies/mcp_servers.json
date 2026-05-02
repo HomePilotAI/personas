@@ -3,7 +3,7 @@
   "servers": [
     {
       "name": "mcp-storyteller",
-      "description": "Production-ready MCP server for persona-centered live play and branching AI video sessions.",
+      "description": "MCP server for the Storyteller persona.",
       "default_port": 9107,
       "url": "http://localhost:9107",
       "auth_type": "open",
@@ -14,10 +14,12 @@
       },
       "transport": "HTTP",
       "protocol": "MCP",
+      "health_endpoint": "/health",
+      "tools_endpoint": "/tools",
       "tools_provided": [
-        "describe_session_vibe",
-        "build_branching_video_project",
-        "suggest_live_play_examples"
+        "story_scene",
+        "story_choice",
+        "story_ending"
       ]
     }
   ]

@@ -1,6 +1,23 @@
 {
   "id": "personal-trainer",
   "name": "Personal Trainer",
-  "version": "1.0.0",
-  "file": "packages/personal-trainer/1.0.0/persona.hpersona"
+  "short": "Coach who programs workouts, tracks recovery and keeps your streak alive.",
+  "author": "homepilot-team",
+  "nsfw": false,
+  "tags": [
+    "lifestyle",
+    "productivity"
+  ],
+  "class_id": "coach",
+  "downloads": 0,
+  "submitted_at": "2026-05-02T06:54:22Z",
+  "issue_number": null,
+  "latest": {
+    "version": "1.0.0",
+    "preview_url": "previews/personal-trainer/1.0.0/preview.webp",
+    "card_url": "previews/personal-trainer/1.0.0/card.json",
+    "package_url": "packages/personal-trainer/1.0.0/persona.hpersona",
+    "size_bytes": 347074,
+    "submitted_at": "2026-05-02T06:54:22Z"
+  }
 }

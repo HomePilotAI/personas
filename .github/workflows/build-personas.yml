@@ -1,18 +1,67 @@
-name: Build Personas
+name: Build & validate personas
 
 on:
+  push:
+    branches: [main, master, "claude/**"]
+  pull_request:
+    branches: [main, master]
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
+      - uses: actions/checkout@v4
         with:
-          node-version: 18
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install system fonts
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y fonts-dejavu fonts-noto-core
+
       - name: Install dependencies
-        run: npm install
-      - name: Build stub packages
-        run: echo "Stub build in GitHub Actions"
+        run: pip install -r requirements.txt
+
+      - name: Generate assets
+        run: python3 scripts/generate_assets.py
+
+      - name: Generate metadata
+        run: python3 scripts/generate_metadata.py
+
+      - name: Build .hpersona packages
+        run: python3 scripts/build_hpersona.py
+
+      - name: Validate personas
+        run: python3 scripts/validate_personas.py
+
+      - name: Verify MCP server portfolio (warnings only)
+        run: python3 scripts/verify_mcp_portfolio.py || true
+
+      - name: Commit generated assets back to branch
+        if: github.event_name == 'push' && startsWith(github.ref, 'refs/heads/claude/')
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add personas/*/hpersona/assets personas/*/gallery/preview.webp
+          if git diff --staged --quiet; then
+            echo "No asset changes to commit."
+          else
+            git commit -m "Regenerate persona avatars + gallery previews (CI)"
+            git push
+          fi
+
+      - name: Upload dist/ artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: hpersona-packages
+          path: dist/
+          retention-days: 30
