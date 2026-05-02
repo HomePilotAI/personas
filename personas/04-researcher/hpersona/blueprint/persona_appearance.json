@@ -1,4 +1,11 @@
 {
   "schema_version": 1,
-  "avatar_id": "avatar_researcher.png"
+  "avatar_id": "avatar_researcher.png",
+  "thumb_id": "thumb_avatar_researcher.webp",
+  "palette": [
+    "#0ea5e9",
+    "#6366f1",
+    "#0f172a"
+  ],
+  "emoji": "🔬"
 }

@@ -1,6 +1,8 @@
 {
   "schema_version": 1,
   "tools": [
-    "generate_workout_plan"
+    "trainer_workout_plan",
+    "trainer_recovery_check",
+    "trainer_streak"
   ]
 }

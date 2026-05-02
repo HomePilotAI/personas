@@ -1,4 +1,11 @@
 {
   "schema_version": 1,
-  "avatar_id": "avatar_personal-trainer.png"
+  "avatar_id": "avatar_personal-trainer.png",
+  "thumb_id": "thumb_avatar_personal-trainer.webp",
+  "palette": [
+    "#22c55e",
+    "#14b8a6",
+    "#0f172a"
+  ],
+  "emoji": "💪"
 }

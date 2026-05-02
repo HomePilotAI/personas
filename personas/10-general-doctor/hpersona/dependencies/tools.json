@@ -1,6 +1,8 @@
 {
   "schema_version": 1,
   "tools": [
-    "general_health_advice"
+    "doctor_general_info",
+    "doctor_red_flags",
+    "doctor_self_care"
   ]
 }

@@ -1,13 +1,25 @@
 {
   "name": "mcp-general-doctor",
-  "description": "MCP server for General Doctor persona.",
+  "description": "MCP server for the General Doctor persona.",
   "default_port": 9110,
   "protocol": "HTTP",
+  "transport": "HTTP",
   "version": "1.0.0",
+  "health_endpoint": "/health",
+  "tools_endpoint": "/tools",
+  "auth_type": "open",
   "tools": [
     {
-      "name": "general_health_advice",
-      "description": "Provides general health advice."
+      "name": "doctor_general_info",
+      "description": "Shares non-diagnostic health information."
+    },
+    {
+      "name": "doctor_red_flags",
+      "description": "Screens described symptoms for red flags."
+    },
+    {
+      "name": "doctor_self_care",
+      "description": "Suggests evidence-aligned self-care steps."
     }
   ]
 }

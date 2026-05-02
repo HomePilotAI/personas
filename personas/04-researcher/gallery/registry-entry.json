@@ -1,6 +1,23 @@
 {
   "id": "researcher",
   "name": "Researcher",
-  "version": "1.0.0",
-  "file": "packages/researcher/1.0.0/persona.hpersona"
+  "short": "Scholarly assistant who finds papers, extracts findings and cites sources.",
+  "author": "homepilot-team",
+  "nsfw": false,
+  "tags": [
+    "research",
+    "professional"
+  ],
+  "class_id": "scholar",
+  "downloads": 0,
+  "submitted_at": "2026-05-02T06:54:22Z",
+  "issue_number": null,
+  "latest": {
+    "version": "1.0.0",
+    "preview_url": "previews/researcher/1.0.0/preview.webp",
+    "card_url": "previews/researcher/1.0.0/card.json",
+    "package_url": "packages/researcher/1.0.0/persona.hpersona",
+    "size_bytes": 0,
+    "submitted_at": "2026-05-02T06:54:22Z"
+  }
 }

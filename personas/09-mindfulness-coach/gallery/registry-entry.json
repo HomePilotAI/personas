@@ -1,6 +1,22 @@
 {
   "id": "mindfulness-coach",
   "name": "Mindfulness Coach",
-  "version": "1.0.0",
-  "file": "packages/mindfulness-coach/1.0.0/persona.hpersona"
+  "short": "Gentle mindfulness guide — meditation scripts, grounding and stress relief.",
+  "author": "homepilot-team",
+  "nsfw": false,
+  "tags": [
+    "lifestyle"
+  ],
+  "class_id": "coach",
+  "downloads": 0,
+  "submitted_at": "2026-05-02T06:54:22Z",
+  "issue_number": null,
+  "latest": {
+    "version": "1.0.0",
+    "preview_url": "previews/mindfulness-coach/1.0.0/preview.webp",
+    "card_url": "previews/mindfulness-coach/1.0.0/card.json",
+    "package_url": "packages/mindfulness-coach/1.0.0/persona.hpersona",
+    "size_bytes": 0,
+    "submitted_at": "2026-05-02T06:54:22Z"
+  }
 }

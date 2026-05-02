@@ -3,7 +3,7 @@
   "servers": [
     {
       "name": "mcp-secretary-pro",
-      "description": "MCP server for Secretary Pro persona.",
+      "description": "MCP server for the Secretary Pro persona.",
       "default_port": 9103,
       "url": "http://localhost:9103",
       "auth_type": "open",
@@ -14,8 +14,12 @@
       },
       "transport": "HTTP",
       "protocol": "MCP",
+      "health_endpoint": "/health",
+      "tools_endpoint": "/tools",
       "tools_provided": [
-        "manage_schedule"
+        "secretary_schedule",
+        "secretary_remind",
+        "secretary_triage"
       ]
     }
   ]

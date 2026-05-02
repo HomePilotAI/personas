@@ -1,4 +1,11 @@
 {
   "schema_version": 1,
-  "avatar_id": "avatar_mindfulness-coach.png"
+  "avatar_id": "avatar_mindfulness-coach.png",
+  "thumb_id": "thumb_avatar_mindfulness-coach.webp",
+  "palette": [
+    "#14b8a6",
+    "#a78bfa",
+    "#f0fdfa"
+  ],
+  "emoji": "🧘"
 }

@@ -1,4 +1,11 @@
 {
   "schema_version": 1,
-  "avatar_id": "avatar_room-stylist.png"
+  "avatar_id": "avatar_room-stylist.png",
+  "thumb_id": "thumb_avatar_room-stylist.webp",
+  "palette": [
+    "#f59e0b",
+    "#d97706",
+    "#7c2d12"
+  ],
+  "emoji": "🛋️"
 }

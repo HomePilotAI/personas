@@ -1,6 +1,23 @@
 {
   "id": "general-doctor",
   "name": "General Doctor",
-  "version": "1.0.0",
-  "file": "packages/general-doctor/1.0.0/persona.hpersona"
+  "short": "General health information companion — non-diagnostic wellness guidance.",
+  "author": "homepilot-team",
+  "nsfw": false,
+  "tags": [
+    "lifestyle",
+    "professional"
+  ],
+  "class_id": "advisor",
+  "downloads": 0,
+  "submitted_at": "2026-05-02T06:54:22Z",
+  "issue_number": null,
+  "latest": {
+    "version": "1.0.0",
+    "preview_url": "previews/general-doctor/1.0.0/preview.webp",
+    "card_url": "previews/general-doctor/1.0.0/card.json",
+    "package_url": "packages/general-doctor/1.0.0/persona.hpersona",
+    "size_bytes": 376858,
+    "submitted_at": "2026-05-02T06:54:22Z"
+  }
 }

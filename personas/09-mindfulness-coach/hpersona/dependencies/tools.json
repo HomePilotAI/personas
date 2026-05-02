@@ -1,6 +1,8 @@
 {
   "schema_version": 1,
   "tools": [
-    "lead_meditation"
+    "mindfulness_meditation",
+    "mindfulness_grounding",
+    "mindfulness_focus"
   ]
 }

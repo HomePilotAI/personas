@@ -1,4 +1,11 @@
 {
   "schema_version": 1,
-  "avatar_id": "avatar_storyteller.png"
+  "avatar_id": "avatar_storyteller.png",
+  "thumb_id": "thumb_avatar_storyteller.webp",
+  "palette": [
+    "#8b5cf6",
+    "#ec4899",
+    "#0ea5e9"
+  ],
+  "emoji": "🎬"
 }

@@ -1,6 +1,8 @@
 {
   "schema_version": 1,
   "tools": [
-    "manage_schedule"
+    "secretary_schedule",
+    "secretary_remind",
+    "secretary_triage"
   ]
 }

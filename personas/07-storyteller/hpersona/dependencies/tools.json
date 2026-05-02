@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "tools": [
-    "describe_session_vibe",
-    "build_branching_video_project",
-    "suggest_live_play_examples"
+    "story_scene",
+    "story_choice",
+    "story_ending"
   ]
 }
