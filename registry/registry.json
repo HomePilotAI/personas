@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated_at": "2026-05-02T06:54:22Z",
+  "generated_at": "2026-05-03T18:23:03Z",
   "items": [
     {
       "id": "creator-muse",
@@ -22,9 +22,9 @@
         "preview_url": "previews/creator-muse/1.0.0/preview.webp",
         "card_url": "previews/creator-muse/1.0.0/card.json",
         "package_url": "packages/creator-muse/1.0.0/persona.hpersona",
-        "size_bytes": 421311,
+        "size_bytes": 399045,
         "submitted_at": "2026-05-02T06:54:22Z",
-        "sha256": "placeholder-ae86ef158195ca09bbb5f672ee4810150a2c6dd5759d9947027225282cf360c8"
+        "sha256": "3cf2fa861bb0355dc64abaa2426e81466bcb85bf63d945f6cdc66b145c8aa5b9"
       }
     },
     {
@@ -46,9 +46,9 @@
         "preview_url": "previews/style-muse/1.0.0/preview.webp",
         "card_url": "previews/style-muse/1.0.0/card.json",
         "package_url": "packages/style-muse/1.0.0/persona.hpersona",
-        "size_bytes": 422958,
+        "size_bytes": 407428,
         "submitted_at": "2026-05-02T06:54:22Z",
-        "sha256": "placeholder-957760bb297a9342e0c7bb32b5ca17142859f0a7b33fc2b4a53668c1b1077445"
+        "sha256": "a5e56a48dd32a01319ae45c55d0e96caa3c1a693fcf2d7ea772ee926ab406bcb"
       }
     },
     {
@@ -70,9 +70,9 @@
         "preview_url": "previews/secretary-pro/1.0.0/preview.webp",
         "card_url": "previews/secretary-pro/1.0.0/card.json",
         "package_url": "packages/secretary-pro/1.0.0/persona.hpersona",
-        "size_bytes": 377831,
+        "size_bytes": 382998,
         "submitted_at": "2026-05-02T06:54:22Z",
-        "sha256": "placeholder-0d7bb1d5b9dac6fafc3b292d2573bf347973fe25953585640fc5341d637bcb71"
+        "sha256": "3246662b833208f8194189c821955f560a32f04e4ecb0623e53cc75852bead42"
       }
     },
     {
@@ -94,9 +94,9 @@
         "preview_url": "previews/researcher/1.0.0/preview.webp",
         "card_url": "previews/researcher/1.0.0/card.json",
         "package_url": "packages/researcher/1.0.0/persona.hpersona",
-        "size_bytes": 373193,
+        "size_bytes": 387850,
         "submitted_at": "2026-05-02T06:54:22Z",
-        "sha256": "placeholder-146b9e0a127e28e53bfcb7956c3b79898b7c9517122fa589d1647fae08746f99"
+        "sha256": "46b72f12bfafb906de717af0503f7dbdc9ab6a25bbea531d81ec34a80cf59927"
       }
     },
     {
@@ -118,9 +118,9 @@
         "preview_url": "previews/personal-trainer/1.0.0/preview.webp",
         "card_url": "previews/personal-trainer/1.0.0/card.json",
         "package_url": "packages/personal-trainer/1.0.0/persona.hpersona",
-        "size_bytes": 347074,
+        "size_bytes": 346519,
         "submitted_at": "2026-05-02T06:54:22Z",
-        "sha256": "placeholder-dee41c155e152222ae0effb2f09f3a0db2397a914881c4aef84bb7f3f147d017"
+        "sha256": "7da459d3a39b4dccb829c4f8c35b787b416f6d1beeab24aeac61c3efb79ddd7f"
       }
     },
     {
@@ -142,9 +142,9 @@
         "preview_url": "previews/room-stylist/1.0.0/preview.webp",
         "card_url": "previews/room-stylist/1.0.0/card.json",
         "package_url": "packages/room-stylist/1.0.0/persona.hpersona",
-        "size_bytes": 351325,
+        "size_bytes": 351545,
         "submitted_at": "2026-05-02T06:54:22Z",
-        "sha256": "placeholder-4248fddabab4f48db0e7c2e2a05d63dfcf586582b94df7bdc3b30da70e905d79"
+        "sha256": "ee001746c75edfe5c5346183e8ec439a5eededa2cceef85a033ffea4ffab6cd9"
       }
     },
     {
@@ -167,9 +167,9 @@
         "preview_url": "previews/storyteller/1.0.0/preview.webp",
         "card_url": "previews/storyteller/1.0.0/card.json",
         "package_url": "packages/storyteller/1.0.0/persona.hpersona",
-        "size_bytes": 410827,
+        "size_bytes": 408926,
         "submitted_at": "2026-05-02T06:54:22Z",
-        "sha256": "placeholder-e523813e74ee7d847380fd0a7a22cdc412c60cf4a5e34c140c384bce3ca6cb52"
+        "sha256": "17d25b4c4baac8dd3f6e62eb5cd90f9cce10eb278c9dd4993c8f24bbbc63a24a"
       }
     },
     {
@@ -191,9 +191,9 @@
         "preview_url": "previews/exam-coach/1.0.0/preview.webp",
         "card_url": "previews/exam-coach/1.0.0/card.json",
         "package_url": "packages/exam-coach/1.0.0/persona.hpersona",
-        "size_bytes": 377048,
+        "size_bytes": 371253,
         "submitted_at": "2026-05-02T06:54:22Z",
-        "sha256": "placeholder-defcf34afcada528ade8d51096b2e57d09bedac1126800d22f06ed21e560f4e9"
+        "sha256": "2d28e1694fb1b11b8979a7f468f326871972c37932d4ae3e12b3280aabc8a235"
       }
     },
     {
@@ -214,9 +214,9 @@
         "preview_url": "previews/mindfulness-coach/1.0.0/preview.webp",
         "card_url": "previews/mindfulness-coach/1.0.0/card.json",
         "package_url": "packages/mindfulness-coach/1.0.0/persona.hpersona",
-        "size_bytes": 423712,
+        "size_bytes": 422663,
         "submitted_at": "2026-05-02T06:54:22Z",
-        "sha256": "placeholder-a0c567e78bcf6d0d57077ee1b29c005e4091dfa6286aedf1492481feaff122ce"
+        "sha256": "2bae0ad7f6c331374ea03d26694783b031543a3bc5f5048ff83d14699ad528d6"
       }
     },
     {
@@ -238,9 +238,9 @@
         "preview_url": "previews/general-doctor/1.0.0/preview.webp",
         "card_url": "previews/general-doctor/1.0.0/card.json",
         "package_url": "packages/general-doctor/1.0.0/persona.hpersona",
-        "size_bytes": 376858,
+        "size_bytes": 369100,
         "submitted_at": "2026-05-02T06:54:22Z",
-        "sha256": "placeholder-fc450cae3e8e7337ec15e3e5dd67c2922e189a7fad6947c3728c5260006d5e99"
+        "sha256": "4752bdde74cb28d611e9e265bc036ca3089527b474b86d990cdf3b8c5aaf4e78"
       }
     }
   ],

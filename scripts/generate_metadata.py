@@ -131,25 +131,44 @@ def manifest_json(p: dict) -> dict:
 
 def mcp_servers_json(p: dict) -> dict:
     base_port = 9100 + int(p["dir"].split("-")[0])
-    return {
-        "schema_version": 1,
-        "servers": [
-            {
-                "name": p["mcp_server"],
-                "description": f"MCP server for the {p['name']} persona.",
-                "default_port": base_port,
-                "url": f"http://localhost:{base_port}",
-                "auth_type": "open",
-                "registry_id": p["mcp_server"],
-                "source": {"type": "registry", "registry_id": p["mcp_server"]},
-                "transport": "HTTP",
-                "protocol": "MCP",
-                "health_endpoint": "/health",
-                "tools_endpoint": "/tools",
-                "tools_provided": p["tools"],
-            }
-        ],
+
+    # Preserve hand-authored install / source / upstream blocks on disk so
+    # this generator stays non-destructive: it owns the static contract
+    # fields (name, port, tools_provided, …) but never strips the install
+    # manifest the persona maintainer added for HomePilot's auto-installer.
+    existing_path = ROOT / "personas" / p["dir"] / "hpersona" / "dependencies" / "mcp_servers.json"
+    existing_server: dict = {}
+    if existing_path.exists():
+        try:
+            existing = json.loads(existing_path.read_text())
+            servers = existing.get("servers") or []
+            if servers:
+                existing_server = servers[0]
+        except (json.JSONDecodeError, OSError):
+            existing_server = {}
+
+    source = existing_server.get("source") or {"type": "registry", "registry_id": p["mcp_server"]}
+    server: dict = {
+        "name": p["mcp_server"],
+        "description": existing_server.get("description") or f"MCP server for the {p['name']} persona.",
+        "default_port": base_port,
+        "url": f"http://localhost:{base_port}",
+        "auth_type": existing_server.get("auth_type") or "open",
+        "registry_id": p["mcp_server"],
+        "source": source,
+        "transport": existing_server.get("transport") or "HTTP",
+        "protocol": "MCP",
+        "health_endpoint": "/health",
+        "tools_endpoint": "/tools",
+        "tools_provided": p["tools"],
     }
+    if existing_server.get("mcp_endpoint"):
+        server["mcp_endpoint"] = existing_server["mcp_endpoint"]
+    if existing_server.get("install"):
+        server["install"] = existing_server["install"]
+    if existing_server.get("upstream"):
+        server["upstream"] = existing_server["upstream"]
+    return {"schema_version": 1, "servers": [server]}
 
 
 def tools_json(p: dict) -> dict:

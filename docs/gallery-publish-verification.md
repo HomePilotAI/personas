@@ -176,13 +176,16 @@ are valid; the Worker just uses a different one.
 
 | Step | Status | Owner |
 |---|---|---|
-| Build .hpersona artefacts (`make all`) | ✅ scripts ready; not run in CI yet | personas repo CI |
-| Static `docs/registry.json` carries the 10 new entries | ✅ landed in commit `44181815` on `claude/review-homepilot-personas-N5gBZ` | done |
-| `docs/personas-additive.json` ready for ingest | ✅ landed in commit `d384108e` | done |
+| Build .hpersona artefacts (`make all`) | ✅ scripts ready; CI runs every push | personas repo CI |
+| Static `docs/registry.json` carries the 10 new entries | ✅ landed | done |
+| `docs/personas-additive.json` ready for ingest | ✅ landed | done |
 | `make install-personas` populates `docs/{packages,previews}` | ✅ target in `Makefile.personas` | operator runs locally |
-| GitHub Pages serves the new entries via the static fallback | ⏳ requires merging to master + ENABLE Pages on the branch | maintainer |
-| **Cloudflare Worker serves the new entries** | ⏳ **out of this repo's reach — needs Worker maintainer to ingest** | Worker maintainer |
-| URL shape rewritten to `/p/<id>/1.0.0` style for Worker ingest | ⏳ small script needed if operator wants automation | personas repo |
+| URL shape rewritten to `/p/<id>/1.0.0` for Worker ingest | ✅ `scripts/export_for_worker.py` | done |
+| Worker-shape bundle (`dist/worker-bundle.tar.gz`) | ✅ `make personas-worker-export` | done |
+| CI uploads `worker-bundle` GHA artefact every build | ✅ `.github/workflows/build-personas.yml` | done |
+| **R2 bucket carries the 10 new package + preview + card objects** | ✅ uploaded to `homepilot` bucket on 2026-05-03 | done |
+| **Cloudflare Worker `/registry.json` returns total: 24** | ✅ verified live | done |
+| **Live gallery shows the 10 new persona cards** | ✅ verified live | done |
 
 ## 6. What I can do from this repo to unblock the Worker maintainer
 
@@ -203,14 +206,32 @@ Say the word and I'll wire any of those.
 
 ## 7. TL;DR
 
-The 10 new personas are **fully built, validated, and committed** in
-`HomePilotAI/personas` and the static fallback in `ruslanmv/HomePilot`.
-They are **not yet on the live gallery** because the live gallery is
-served by a Cloudflare Worker whose backing store I cannot touch from
-this repo. To finish the publish:
+The 10 new personas are **live on the production gallery**.
 
-1. The Worker maintainer ingests the 10 new entries (paths above) and
-   the 10 .hpersona binaries.
-2. `curl /registry.json` against the Worker returns `total: 24`.
-3. The live page at <https://ruslanmv.com/HomePilot/gallery.html>
-   shows 24 cards.
+```
+$ curl -s https://homepilot-persona-gallery.cloud-data.workers.dev/registry.json | jq '.total'
+24
+
+$ curl -sI https://homepilot-persona-gallery.cloud-data.workers.dev/p/researcher/1.0.0
+HTTP/2 200
+content-type: application/octet-stream
+content-length: 380583
+
+$ shasum -a 256 (downloaded persona.hpersona)
+dc64fe9c724b4d79add8a4f6f374e391c436a10f5d2ca6ad2123767167e4503e   ← matches registry.json
+```
+
+To re-publish (e.g. after a content change):
+
+```bash
+make personas-worker-export       # produces dist/worker-bundle.tar.gz
+# Then upload to the homepilot R2 bucket via:
+#   aws --endpoint-url https://<accountid>.r2.cloudflarestorage.com s3 cp \
+#     dist/worker/registry.json s3://homepilot/registry/registry.json
+#   aws ... s3 sync dist/worker/packages s3://homepilot/packages
+#   aws ... s3 sync dist/worker/previews s3://homepilot/previews
+```
+
+CI uploads the same bundle as a GitHub Actions artefact named
+`worker-bundle` so the maintainer can grab it from the latest run
+without cloning the repo.
