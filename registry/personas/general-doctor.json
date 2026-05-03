@@ -18,6 +18,7 @@
     "card_url": "previews/general-doctor/1.0.0/card.json",
     "package_url": "packages/general-doctor/1.0.0/persona.hpersona",
     "size_bytes": 376858,
-    "submitted_at": "2026-05-02T06:54:22Z"
+    "submitted_at": "2026-05-02T06:54:22Z",
+    "sha256": "placeholder-fc450cae3e8e7337ec15e3e5dd67c2922e189a7fad6947c3728c5260006d5e99"
   }
 }

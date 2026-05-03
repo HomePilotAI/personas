@@ -1,53 +1,17 @@
-version: '3.9'
-services:
-  # Example service definitions for each MCP server
-  mcp-creator-muse:
-    build: .
-    command: node mcp-servers/01-mcp-creator-muse/src/index.js
-    ports:
-      - "9101:9101"
-  mcp-style-muse:
-    build: .
-    command: node mcp-servers/02-mcp-style-muse/src/index.js
-    ports:
-      - "9102:9102"
-  mcp-secretary-pro:
-    build: .
-    command: node mcp-servers/03-mcp-secretary-pro/src/index.js
-    ports:
-      - "9103:9103"
-  mcp-researcher:
-    build: .
-    command: node mcp-servers/04-mcp-researcher/src/index.js
-    ports:
-      - "9104:9104"
-  mcp-personal-trainer:
-    build: .
-    command: node mcp-servers/05-mcp-personal-trainer/src/index.js
-    ports:
-      - "9105:9105"
-  mcp-room-stylist:
-    build: .
-    command: node mcp-servers/06-mcp-room-stylist/src/index.js
-    ports:
-      - "9106:9106"
-  mcp-storyteller:
-    build: .
-    command: node mcp-servers/07-mcp-storyteller/src/index.js
-    ports:
-      - "9107:9107"
-  mcp-exam-coach:
-    build: .
-    command: node mcp-servers/08-mcp-exam-coach/src/index.js
-    ports:
-      - "9108:9108"
-  mcp-mindfulness-coach:
-    build: .
-    command: node mcp-servers/09-mcp-mindfulness-coach/src/index.js
-    ports:
-      - "9109:9109"
-  mcp-general-doctor:
-    build: .
-    command: node mcp-servers/10-mcp-general-doctor/src/index.js
-    ports:
-      - "9110:9110"
+# Top-level compose entrypoint.
+#
+# The canonical service definitions live in docker-compose.mcp.yml. That
+# file is kept separately because the persona pack is consumed both as a
+# standalone repo (`docker compose up`) and as a layer that callers
+# `docker compose -f docker-compose.mcp.yml up` from their own stack.
+#
+# Compose v2 `include:` brings the canonical file in unchanged. Older
+# tooling that does not support `include:` should run the canonical file
+# directly:
+#
+#     docker compose -f docker-compose.mcp.yml up
+#
+# Do NOT add service overrides here that contradict docker-compose.mcp.yml
+# — keep this file as a thin alias.
+include:
+  - docker-compose.mcp.yml

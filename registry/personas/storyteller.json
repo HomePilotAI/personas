@@ -19,6 +19,7 @@
     "card_url": "previews/storyteller/1.0.0/card.json",
     "package_url": "packages/storyteller/1.0.0/persona.hpersona",
     "size_bytes": 410827,
-    "submitted_at": "2026-05-02T06:54:22Z"
+    "submitted_at": "2026-05-02T06:54:22Z",
+    "sha256": "placeholder-e523813e74ee7d847380fd0a7a22cdc412c60cf4a5e34c140c384bce3ca6cb52"
   }
 }

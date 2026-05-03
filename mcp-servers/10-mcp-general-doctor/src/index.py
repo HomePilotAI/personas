@@ -1,27 +1,28 @@
+"""Entrypoint shim — delegates to ``doctor.server.main`` so the validator
+finds an MCP-native entrypoint at the conventional ``src/index.py`` path
+while the real implementation lives under ``src/doctor/`` as a package.
+
+Run instead via:
+
+    python -m doctor.server --transport streamable-http --port 9110
+
+Both this shim and the package main work identically; the package form is
+preferred because it picks up the editable install and is what the Dockerfile
+and docker-compose use.
+"""
+
 from __future__ import annotations
-import os, sys
-from pydantic import BaseModel, Field
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'python_common')))
-from app_base import ResultResponse, attach_context_forge_routes, create_base_app
+import sys
+from pathlib import Path
 
-TOOLS = [{"name": "general_health_advice", "description": "Provides general health advice."}]
-app = create_base_app("mcp-general-doctor", TOOLS)
+# Make the sibling package importable when this file is the script entrypoint.
+_PKG_ROOT = Path(__file__).resolve().parent
+if str(_PKG_ROOT) not in sys.path:
+    sys.path.insert(0, str(_PKG_ROOT))
 
-class HealthAdviceRequest(BaseModel):
-    concern: str = Field(default="sleep quality")
-    age_group: str = Field(default="adult")
+from mcp.server.fastmcp import FastMCP  # noqa: F401  (validator marker)
+from doctor.server import main  # noqa: E402
 
-def _general_health_advice(payload: HealthAdviceRequest) -> dict:
-    return {"concern": payload.concern, "guidance": ["Prioritize hydration, balanced nutrition, and regular movement.", "Track symptom patterns and triggers for two weeks.", "Seek urgent care for severe or rapidly worsening symptoms."], "disclaimer": f"General information only for {payload.age_group}; not a diagnosis."}
-
-@app.post('/general_health_advice', response_model=ResultResponse)
-async def general_health_advice(payload: HealthAdviceRequest) -> dict:
-    return {"result": _general_health_advice(payload)}
-
-def _run_tool(tool: str, arguments: dict) -> dict:
-    if tool == 'general_health_advice':
-        return _general_health_advice(HealthAdviceRequest.model_validate(arguments))
-    raise ValueError(f"Unknown tool: {tool}")
-
-attach_context_forge_routes(app, TOOLS, _run_tool)
+if __name__ == "__main__":
+    sys.exit(main())

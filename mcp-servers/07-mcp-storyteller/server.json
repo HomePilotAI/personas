@@ -2,24 +2,37 @@
   "name": "mcp-storyteller",
   "description": "MCP server for the Storyteller persona.",
   "default_port": 9107,
-  "protocol": "HTTP",
-  "transport": "HTTP",
+  "protocol": "MCP",
+  "transport": "streamable-http",
   "version": "1.0.0",
   "health_endpoint": "/health",
   "tools_endpoint": "/tools",
+  "mcp_endpoint": "/mcp",
   "auth_type": "open",
+  "runtime": "node",
+  "entrypoint": "node src/index.js",
+  "safety": {
+    "category": "content",
+    "rating_default": "sfw",
+    "never_does": [
+      "produce sexual content involving minors",
+      "produce explicit violence against minors",
+      "produce hateful or dehumanising content targeting protected groups",
+      "exceed the declared content rating without an explicit upgrade"
+    ]
+  },
   "tools": [
     {
       "name": "story_scene",
-      "description": "Generates the next scene with beats."
+      "description": "Generate the next branching scene (SETTING · MOOD · BEATS · CHOICE · NEXT-SCENE HOOK), under ~200 words."
     },
     {
       "name": "story_choice",
-      "description": "Drafts player choices."
+      "description": "Draft 2-3 player choices for the current scene with outcome notes; choices reveal personality, not just information."
     },
     {
       "name": "story_ending",
-      "description": "Resolves the branch into an ending."
+      "description": "Resolve a branch into one of three endings (Growth / Balanced / Chaos) with a closing beat."
     }
   ]
 }

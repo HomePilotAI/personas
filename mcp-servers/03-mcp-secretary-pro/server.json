@@ -2,24 +2,36 @@
   "name": "mcp-secretary-pro",
   "description": "MCP server for the Secretary Pro persona.",
   "default_port": 9103,
-  "protocol": "HTTP",
-  "transport": "HTTP",
+  "protocol": "MCP",
+  "transport": "streamable-http",
   "version": "1.0.0",
   "health_endpoint": "/health",
   "tools_endpoint": "/tools",
+  "mcp_endpoint": "/mcp",
   "auth_type": "open",
+  "runtime": "node",
+  "entrypoint": "node src/index.js",
+  "safety": {
+    "category": "productivity",
+    "policy": "draft-only",
+    "never_does": [
+      "send messages on the user's behalf",
+      "create calendar events without explicit confirmation",
+      "share contact details with third parties"
+    ]
+  },
   "tools": [
     {
       "name": "secretary_schedule",
-      "description": "Proposes calendar slots across time zones."
+      "description": "Propose 3 time-zone-aware meeting slots plus a fallback. Drafts only — never books."
     },
     {
       "name": "secretary_remind",
-      "description": "Creates time-aware reminders."
+      "description": "Create time-aware reminder drafts. Output is a structured reminder envelope; the caller decides whether to commit it to a real reminder system."
     },
     {
       "name": "secretary_triage",
-      "description": "Sorts inbox items by urgency bucket."
+      "description": "Sort inbox items into Now / Today / This Week / Defer buckets with a one-line rationale per item."
     }
   ]
 }

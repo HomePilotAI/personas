@@ -1,25 +1,36 @@
 {
   "name": "mcp-researcher",
-  "description": "MCP server for the Researcher persona.",
+  "description": "Python-native MCP server for academic research (arXiv search, paper reading, summaries, comparisons, literature briefs).",
   "default_port": 9104,
-  "protocol": "HTTP",
-  "transport": "HTTP",
+  "protocol": "MCP",
+  "transport": "streamable-http",
   "version": "1.0.0",
   "health_endpoint": "/health",
   "tools_endpoint": "/tools",
+  "mcp_endpoint": "/mcp",
   "auth_type": "open",
+  "runtime": "python",
+  "entrypoint": "python -m researcher.server --transport streamable-http",
   "tools": [
     {
-      "name": "researcher_search",
-      "description": "Searches arXiv / publication corpora."
+      "name": "search_arxiv",
+      "description": "Search arXiv and return normalized paper metadata (id, title, authors, abstract, dates, categories, PDF URL)."
     },
     {
-      "name": "researcher_summarize",
-      "description": "Summarizes a paper into key findings."
+      "name": "read_paper",
+      "description": "Fetch metadata for an arXiv paper and optionally extract the full PDF text."
     },
     {
-      "name": "researcher_brief",
-      "description": "Drafts a research brief with citations."
+      "name": "summarize_paper",
+      "description": "Summarize a paper (abstract-first, full-text RAG when available) with key findings, methods and limitations."
+    },
+    {
+      "name": "compare_papers",
+      "description": "Compare 2–5 papers side-by-side across method, dataset, results and limitations."
+    },
+    {
+      "name": "build_literature_brief",
+      "description": "Produce a citation-backed literature brief on a topic, grouped by themes, methods and gaps."
     }
   ]
 }

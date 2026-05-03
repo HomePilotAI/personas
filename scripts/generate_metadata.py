@@ -69,7 +69,10 @@ def persona_agent_json(p: dict) -> dict:
         "class_id": p["class_id"],
         "description": p["short"],
         "system_prompt": p["system_prompt"],
-        "opening_message": f"Hi — I'm {p['name']}, your {p['role'].lower()}. How can I help today?",
+        "opening_message": p.get(
+            "opening_message",
+            f"Hi — I'm {p['name']}, your {p['role'].lower()}. How can I help today?",
+        ),
         "tone_tags": p["tone_tags"],
         "style_tags": p["style_tags"],
         "memory_mode": "adaptive",

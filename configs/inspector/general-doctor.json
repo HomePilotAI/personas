@@ -1,0 +1,15 @@
+{
+  "_comment": "Single-server Inspector config for the General Doctor safety adapter. Run upstream medical-mcp-toolkit at :9090 with BEARER_TOKEN=dev-token, then point Inspector here. The adapter degrades gracefully if upstream is unreachable (red-flag screening still runs locally).",
+  "mcpServers": {
+    "mcp-general-doctor": {
+      "command": "python",
+      "args": ["-m", "doctor.server", "--transport", "stdio"],
+      "cwd": "mcp-servers/10-mcp-general-doctor",
+      "env": {
+        "DOCTOR_MCP_TRANSPORT": "stdio",
+        "MEDICAL_MCP_URL": "http://localhost:9090",
+        "MEDICAL_MCP_BEARER_TOKEN": "dev-token"
+      }
+    }
+  }
+}

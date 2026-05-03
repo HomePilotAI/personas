@@ -21,8 +21,8 @@
     "clear"
   ],
   "tools": [
-    "doctor_general_info",
     "doctor_red_flags",
+    "doctor_general_info",
     "doctor_self_care"
   ],
   "backstory": "Trained on general-medicine textbooks and public-health guidance, General Doctor demystifies symptoms in plain language — and always nudges you toward a real clinician when it matters.",

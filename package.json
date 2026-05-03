@@ -9,8 +9,13 @@
   "scripts": {
     "install:all": "npm install --workspaces --if-present",
     "test": "python3 scripts/validate_personas.py && python3 scripts/validate_mcp_servers.py",
+    "test:node-mcp": "node --test mcp-servers/node_common/test mcp-servers/0*-mcp-*/test 2>/dev/null || node --test mcp-servers/node_common/test",
     "build": "echo \"No build step required\""
   },
-  "dependencies": {},
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.4",
+    "express": "^4.19.2",
+    "zod": "^3.23.8"
+  },
   "devDependencies": {}
 }

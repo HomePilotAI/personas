@@ -1,0 +1,45 @@
+{
+  "_comment": "MCP Inspector config — every migrated server reachable over Streamable HTTP. Start the stack with `docker compose -f docker-compose.mcp.yml up`, then point Inspector at this file. Pending servers are intentionally absent and will be added as they migrate.",
+  "mcpServers": {
+    "mcp-creator-muse": {
+      "type": "streamable-http",
+      "url": "http://localhost:9101/mcp"
+    },
+    "mcp-style-muse": {
+      "type": "streamable-http",
+      "url": "http://localhost:9102/mcp"
+    },
+    "mcp-secretary-pro": {
+      "type": "streamable-http",
+      "url": "http://localhost:9103/mcp"
+    },
+    "mcp-personal-trainer": {
+      "type": "streamable-http",
+      "url": "http://localhost:9105/mcp"
+    },
+    "mcp-room-stylist": {
+      "type": "streamable-http",
+      "url": "http://localhost:9106/mcp"
+    },
+    "mcp-storyteller": {
+      "type": "streamable-http",
+      "url": "http://localhost:9107/mcp"
+    },
+    "mcp-exam-coach": {
+      "type": "streamable-http",
+      "url": "http://localhost:9108/mcp"
+    },
+    "mcp-mindfulness-coach": {
+      "type": "streamable-http",
+      "url": "http://localhost:9109/mcp"
+    },
+    "mcp-researcher": {
+      "type": "streamable-http",
+      "url": "http://localhost:9104/mcp"
+    },
+    "mcp-general-doctor": {
+      "type": "streamable-http",
+      "url": "http://localhost:9110/mcp"
+    }
+  }
+}

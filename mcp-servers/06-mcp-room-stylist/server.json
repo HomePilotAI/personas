@@ -2,24 +2,27 @@
   "name": "mcp-room-stylist",
   "description": "MCP server for the Room Stylist persona.",
   "default_port": 9106,
-  "protocol": "HTTP",
-  "transport": "HTTP",
+  "protocol": "MCP",
+  "transport": "streamable-http",
   "version": "1.0.0",
   "health_endpoint": "/health",
   "tools_endpoint": "/tools",
+  "mcp_endpoint": "/mcp",
   "auth_type": "open",
+  "runtime": "node",
+  "entrypoint": "node src/index.js",
   "tools": [
     {
       "name": "room_layout",
-      "description": "Proposes 2-3 room layout options."
+      "description": "Propose 2-3 room layout options for a footprint and primary use, with zoning and circulation notes."
     },
     {
       "name": "room_palette",
-      "description": "Generates a 60/30/10 colour palette."
+      "description": "Generate a 60/30/10 color palette and material story for the room with hex anchors."
     },
     {
       "name": "room_shopping_list",
-      "description": "Builds a shoppable list at 3 price tiers."
+      "description": "Curate a shoppable list across 3 price tiers (good / better / heirloom), grouped by zone."
     }
   ]
 }

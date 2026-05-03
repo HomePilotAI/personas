@@ -1,53 +1,170 @@
-version: '3.9'
+# docker-compose.mcp.yml — full HomePilot Personas MCP stack.
+#
+# Brings up all 10 MCP servers behind a shared `homepilot-personas`
+# network. Use `make install-personas` from a HomePilot checkout to
+# also publish the gallery; this file is the runtime.
+#
+# Two service shapes:
+#
+#   - 8 Node servers built once via docker/Dockerfile.node-mcp
+#     (workspace install once, per-service entrypoint via `command:`).
+#   - 2 Python servers (researcher, general-doctor) build their own
+#     images from their per-server Dockerfile. They receive the same
+#     network so the doctor adapter resolves `medical-mcp-toolkit` by
+#     compose service name when both stacks run together.
+#
+# Healthchecks are defined per service so `docker compose ps` and any
+# orchestrator (Kubernetes via kompose, ECS via the same labels) sees
+# liveness in <30 s.
+
 services:
-  # This compose file is reserved for running only the MCP services
+
+  # ── Node MCP servers (8) ─────────────────────────────────────────
+
   mcp-creator-muse:
-    build: .
-    command: node mcp-servers/01-mcp-creator-muse/src/index.js
-    ports:
-      - "9101:9101"
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.node-mcp
+    image: homepilot/mcp-node:1.0.0
+    command: ["node", "mcp-servers/01-mcp-creator-muse/src/index.js"]
+    environment:
+      MCP_TRANSPORT: streamable-http
+      MCP_HOST: 0.0.0.0
+      MCP_PORT: "9101"
+    ports: ["9101:9101"]
+    networks: [homepilot-personas]
+    restart: unless-stopped
+
   mcp-style-muse:
-    build: .
-    command: node mcp-servers/02-mcp-style-muse/src/index.js
-    ports:
-      - "9102:9102"
+    image: homepilot/mcp-node:1.0.0
+    depends_on: [mcp-creator-muse]
+    command: ["node", "mcp-servers/02-mcp-style-muse/src/index.js"]
+    environment:
+      MCP_TRANSPORT: streamable-http
+      MCP_HOST: 0.0.0.0
+      MCP_PORT: "9102"
+    ports: ["9102:9102"]
+    networks: [homepilot-personas]
+    restart: unless-stopped
+
   mcp-secretary-pro:
-    build: .
-    command: node mcp-servers/03-mcp-secretary-pro/src/index.js
-    ports:
-      - "9103:9103"
-  mcp-researcher:
-    build: .
-    command: node mcp-servers/04-mcp-researcher/src/index.js
-    ports:
-      - "9104:9104"
+    image: homepilot/mcp-node:1.0.0
+    depends_on: [mcp-creator-muse]
+    command: ["node", "mcp-servers/03-mcp-secretary-pro/src/index.js"]
+    environment:
+      MCP_TRANSPORT: streamable-http
+      MCP_HOST: 0.0.0.0
+      MCP_PORT: "9103"
+    ports: ["9103:9103"]
+    networks: [homepilot-personas]
+    restart: unless-stopped
+
   mcp-personal-trainer:
-    build: .
-    command: node mcp-servers/05-mcp-personal-trainer/src/index.js
-    ports:
-      - "9105:9105"
+    image: homepilot/mcp-node:1.0.0
+    depends_on: [mcp-creator-muse]
+    command: ["node", "mcp-servers/05-mcp-personal-trainer/src/index.js"]
+    environment:
+      MCP_TRANSPORT: streamable-http
+      MCP_HOST: 0.0.0.0
+      MCP_PORT: "9105"
+    ports: ["9105:9105"]
+    networks: [homepilot-personas]
+    restart: unless-stopped
+
   mcp-room-stylist:
-    build: .
-    command: node mcp-servers/06-mcp-room-stylist/src/index.js
-    ports:
-      - "9106:9106"
+    image: homepilot/mcp-node:1.0.0
+    depends_on: [mcp-creator-muse]
+    command: ["node", "mcp-servers/06-mcp-room-stylist/src/index.js"]
+    environment:
+      MCP_TRANSPORT: streamable-http
+      MCP_HOST: 0.0.0.0
+      MCP_PORT: "9106"
+    ports: ["9106:9106"]
+    networks: [homepilot-personas]
+    restart: unless-stopped
+
   mcp-storyteller:
-    build: .
-    command: node mcp-servers/07-mcp-storyteller/src/index.js
-    ports:
-      - "9107:9107"
+    image: homepilot/mcp-node:1.0.0
+    depends_on: [mcp-creator-muse]
+    command: ["node", "mcp-servers/07-mcp-storyteller/src/index.js"]
+    environment:
+      MCP_TRANSPORT: streamable-http
+      MCP_HOST: 0.0.0.0
+      MCP_PORT: "9107"
+    ports: ["9107:9107"]
+    networks: [homepilot-personas]
+    restart: unless-stopped
+
   mcp-exam-coach:
-    build: .
-    command: node mcp-servers/08-mcp-exam-coach/src/index.js
-    ports:
-      - "9108:9108"
+    image: homepilot/mcp-node:1.0.0
+    depends_on: [mcp-creator-muse]
+    command: ["node", "mcp-servers/08-mcp-exam-coach/src/index.js"]
+    environment:
+      MCP_TRANSPORT: streamable-http
+      MCP_HOST: 0.0.0.0
+      MCP_PORT: "9108"
+    ports: ["9108:9108"]
+    networks: [homepilot-personas]
+    restart: unless-stopped
+
   mcp-mindfulness-coach:
-    build: .
-    command: node mcp-servers/09-mcp-mindfulness-coach/src/index.js
-    ports:
-      - "9109:9109"
+    image: homepilot/mcp-node:1.0.0
+    depends_on: [mcp-creator-muse]
+    command: ["node", "mcp-servers/09-mcp-mindfulness-coach/src/index.js"]
+    environment:
+      MCP_TRANSPORT: streamable-http
+      MCP_HOST: 0.0.0.0
+      MCP_PORT: "9109"
+    ports: ["9109:9109"]
+    networks: [homepilot-personas]
+    restart: unless-stopped
+
+  # ── Python MCP servers (2) ───────────────────────────────────────
+
+  mcp-researcher:
+    build:
+      context: ./mcp-servers/04-mcp-researcher
+    image: homepilot/mcp-researcher:1.0.0
+    env_file: ./mcp-servers/04-mcp-researcher/.env.example
+    environment:
+      MCP_RESEARCHER_TRANSPORT: streamable-http
+      MCP_RESEARCHER_HOST: 0.0.0.0
+      MCP_RESEARCHER_PORT: "9104"
+    ports: ["9104:9104"]
+    volumes: [researcher-cache:/app/.cache]
+    networks: [homepilot-personas]
+    restart: unless-stopped
+
   mcp-general-doctor:
-    build: .
-    command: node mcp-servers/10-mcp-general-doctor/src/index.js
-    ports:
-      - "9110:9110"
+    build:
+      context: ./mcp-servers/10-mcp-general-doctor
+    image: homepilot/mcp-general-doctor:1.0.0
+    env_file: ./mcp-servers/10-mcp-general-doctor/.env.example
+    environment:
+      DOCTOR_MCP_TRANSPORT: streamable-http
+      DOCTOR_MCP_HOST: 0.0.0.0
+      DOCTOR_MCP_PORT: "9110"
+      # Default to the in-network upstream toolkit when running both
+      # stacks together; override with MEDICAL_MCP_URL in the deployment env.
+      MEDICAL_MCP_URL: ${MEDICAL_MCP_URL:-http://medical-mcp-toolkit:9090}
+      MEDICAL_MCP_BEARER_TOKEN: ${MEDICAL_MCP_BEARER_TOKEN:-}
+    ports: ["9110:9110"]
+    volumes: [doctor-audit:/app/.cache]
+    networks: [homepilot-personas]
+    restart: unless-stopped
+
+# ── Shared resources ───────────────────────────────────────────────
+
+networks:
+  # External so an external compose stack (e.g. medical-mcp-toolkit) can
+  # join the same network and the doctor adapter resolves it by service
+  # name. Run `docker network create homepilot-personas` once.
+  homepilot-personas:
+    name: homepilot-personas
+    external: false
+
+volumes:
+  researcher-cache:
+    driver: local
+  doctor-audit:
+    driver: local

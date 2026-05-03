@@ -1,0 +1,17 @@
+{
+  "_comment": "Legacy / Context Forge compatibility config for the General Doctor adapter. Use this when the deployment environment expects per-tool POST endpoints and /context-forge/call instead of (or in addition to) the canonical FastMCP /mcp surface. Run with: python -m doctor.server --transport hybrid --port 9110 (one process serves both /mcp and the legacy REST routes).",
+  "mcpServers": {
+    "mcp-general-doctor": {
+      "type": "streamable-http",
+      "url": "http://localhost:9110/mcp",
+      "_legacy_endpoints": {
+        "health": "http://localhost:9110/health",
+        "tools": "http://localhost:9110/tools",
+        "doctor_red_flags": "POST http://localhost:9110/doctor_red_flags",
+        "doctor_general_info": "POST http://localhost:9110/doctor_general_info",
+        "doctor_self_care": "POST http://localhost:9110/doctor_self_care",
+        "context_forge_call": "POST http://localhost:9110/context-forge/call"
+      }
+    }
+  }
+}

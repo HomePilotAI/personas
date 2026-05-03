@@ -18,6 +18,7 @@
     "card_url": "previews/researcher/1.0.0/card.json",
     "package_url": "packages/researcher/1.0.0/persona.hpersona",
     "size_bytes": 373193,
-    "submitted_at": "2026-05-02T06:54:22Z"
+    "submitted_at": "2026-05-02T06:54:22Z",
+    "sha256": "placeholder-146b9e0a127e28e53bfcb7956c3b79898b7c9517122fa589d1647fae08746f99"
   }
 }
