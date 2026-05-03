@@ -365,6 +365,18 @@ def render_thumb(persona: dict, out_path: Path, size: tuple[int, int] = (256, 32
 
 
 def main() -> int:
+    # Stub-size thresholds: anything larger is treated as a real asset
+    # (realistic photo OR a previously-rendered branded placeholder) and
+    # left alone. CI re-runs must NEVER overwrite committed photos —
+    # delete the file on disk to force a re-render.
+    AVATAR_KEEP_BYTES = 5_000   # validate_personas.py minimum
+    THUMB_KEEP_BYTES = 2_000
+    PREVIEW_KEEP_BYTES = 2_000  # validate_personas.py minimum
+    force = os.environ.get("FORCE_REGEN_ASSETS", "").lower() in {"1", "true", "yes"}
+
+    def _keep(path: Path, min_bytes: int) -> bool:
+        return (not force) and path.exists() and path.stat().st_size >= min_bytes
+
     for persona in PERSONAS:
         pdir = ROOT / "personas" / persona["dir"] / "hpersona" / "assets"
         gdir = ROOT / "personas" / persona["dir"] / "gallery"
@@ -372,12 +384,21 @@ def main() -> int:
         thumb_path = pdir / f"thumb_avatar_{persona['id']}.webp"
         preview_path = gdir / "preview.webp"
 
-        print(f"[{persona['id']}] avatar")
-        render_avatar(persona, avatar_path)
-        print(f"[{persona['id']}] thumb")
-        render_thumb(persona, thumb_path)
-        print(f"[{persona['id']}] preview")
-        render_preview(persona, preview_path)
+        if _keep(avatar_path, AVATAR_KEEP_BYTES):
+            print(f"[{persona['id']}] avatar — keep ({avatar_path.stat().st_size}B)")
+        else:
+            print(f"[{persona['id']}] avatar")
+            render_avatar(persona, avatar_path)
+        if _keep(thumb_path, THUMB_KEEP_BYTES):
+            print(f"[{persona['id']}] thumb — keep ({thumb_path.stat().st_size}B)")
+        else:
+            print(f"[{persona['id']}] thumb")
+            render_thumb(persona, thumb_path)
+        if _keep(preview_path, PREVIEW_KEEP_BYTES):
+            print(f"[{persona['id']}] preview — keep ({preview_path.stat().st_size}B)")
+        else:
+            print(f"[{persona['id']}] preview")
+            render_preview(persona, preview_path)
 
     print("\nGenerated production assets for", len(PERSONAS), "personas.")
     return 0
