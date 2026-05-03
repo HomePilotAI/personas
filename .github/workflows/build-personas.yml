@@ -46,16 +46,47 @@ jobs:
       - name: Verify MCP server portfolio (warnings only)
         run: python3 scripts/verify_mcp_portfolio.py || true
 
+      - name: Avatar regression guard (no overwrites of committed photos)
+        # CI must only ADD assets for new personas, never MODIFY committed
+        # photos. The generators are skip-if-exists, but this is a second
+        # line of defence — if either generator regresses, this step aborts
+        # the run so the live gallery never silently downgrades to the
+        # branded "CM"/glyph placeholder again.
+        run: |
+          set -e
+          changed=$(git diff --name-only -- 'personas/*/hpersona/assets/avatar_*.png' \
+                                            'personas/*/hpersona/assets/thumb_avatar_*.webp' \
+                                            'personas/*/gallery/preview.webp' || true)
+          if [ -n "$changed" ]; then
+            echo "::error::Committed persona photos were modified by CI. Refusing to push."
+            echo "Files:"
+            printf '  %s\n' $changed
+            echo "If a re-render is intended, delete the file on disk in your branch and re-push."
+            exit 1
+          fi
+          echo "Avatar regression guard: clean."
+
       - name: Commit generated assets back to branch
         if: github.event_name == 'push' && startsWith(github.ref, 'refs/heads/claude/')
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add personas/*/hpersona/assets personas/*/gallery/preview.webp
-          if git diff --staged --quiet; then
-            echo "No asset changes to commit."
+          # Only stage NEW asset files (untracked) — never modifications.
+          # The regression guard above already failed the build if any
+          # committed photo was modified, but use --intent-to-add semantics
+          # here as belt-and-braces.
+          git add -N personas/*/hpersona/assets personas/*/gallery/preview.webp 2>/dev/null || true
+          new_files=$(git diff --name-only --diff-filter=A -- \
+                       'personas/*/hpersona/assets' \
+                       'personas/*/gallery/preview.webp' || true)
+          if [ -z "$new_files" ]; then
+            echo "No new asset files to commit."
+            git reset >/dev/null 2>&1 || true
           else
-            git commit -m "Regenerate persona avatars + gallery previews (CI)"
+            echo "Adding new asset files:"
+            printf '  %s\n' $new_files
+            git add $new_files
+            git commit -m "Add assets for new persona(s) (CI)"
             git push
           fi
 

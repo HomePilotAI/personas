@@ -320,24 +320,45 @@ def main() -> int:
         return 1
     log.info("rendering %d persona(s)", len(selected))
 
+    # Same skip-if-exists guard as generate_assets.py: never overwrite a
+    # committed realistic photo on re-runs (web fallback non-determinism
+    # would re-roll faces every CI run otherwise). Set FORCE_REGEN_ASSETS=1
+    # or delete the on-disk file to force a re-render.
+    AVATAR_KEEP_BYTES = 5_000
+    THUMB_KEEP_BYTES = 2_000
+    PREVIEW_KEEP_BYTES = 2_000
+    force = os.environ.get("FORCE_REGEN_ASSETS", "").lower() in {"1", "true", "yes"}
+
     for persona in selected:
         pdir = ROOT / "personas" / persona["dir"] / "hpersona" / "assets"
         gdir = ROOT / "personas" / persona["dir"] / "gallery"
         pdir.mkdir(parents=True, exist_ok=True)
         gdir.mkdir(parents=True, exist_ok=True)
 
-        avatar, source = render_for(persona)
         avatar_path = pdir / f"avatar_{persona['id']}.png"
         thumb_path = pdir / f"thumb_avatar_{persona['id']}.webp"
         preview_path = gdir / "preview.webp"
 
-        avatar.save(avatar_path, "PNG", optimize=True)
-        avatar.resize((680, 850), Image.Resampling.LANCZOS).save(
-            preview_path, "WEBP", quality=90, method=6
-        )
-        avatar.resize((256, 320), Image.Resampling.LANCZOS).save(
-            thumb_path, "WEBP", quality=88, method=6
-        )
+        keep_avatar = (not force) and avatar_path.exists() and avatar_path.stat().st_size >= AVATAR_KEEP_BYTES
+        keep_thumb = (not force) and thumb_path.exists() and thumb_path.stat().st_size >= THUMB_KEEP_BYTES
+        keep_preview = (not force) and preview_path.exists() and preview_path.stat().st_size >= PREVIEW_KEEP_BYTES
+
+        if keep_avatar and keep_thumb and keep_preview:
+            log.info("[%s] all assets present — keep", persona["id"])
+            continue
+
+        avatar, source = render_for(persona)
+
+        if not keep_avatar:
+            avatar.save(avatar_path, "PNG", optimize=True)
+        if not keep_preview:
+            avatar.resize((680, 850), Image.Resampling.LANCZOS).save(
+                preview_path, "WEBP", quality=90, method=6
+            )
+        if not keep_thumb:
+            avatar.resize((256, 320), Image.Resampling.LANCZOS).save(
+                thumb_path, "WEBP", quality=88, method=6
+            )
         log.info("[%s] source=%s avatar=%s", persona["id"], source, avatar_path.name)
 
     print(f"\nRendered {len(selected)} persona avatar(s).")
