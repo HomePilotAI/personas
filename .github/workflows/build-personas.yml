@@ -59,9 +59,23 @@ jobs:
             git push
           fi
 
+      - name: Build Cloudflare Worker bundle (additive merge)
+        run: |
+          python3 scripts/export_for_worker.py --mode=merge || \
+            python3 scripts/export_for_worker.py --mode=additive
+          tar -czf dist/worker-bundle.tar.gz -C dist worker
+          ls -la dist/worker-bundle.tar.gz
+
       - name: Upload dist/ artifact
         uses: actions/upload-artifact@v4
         with:
           name: hpersona-packages
           path: dist/
           retention-days: 30
+
+      - name: Upload Cloudflare Worker bundle artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: worker-bundle
+          path: dist/worker-bundle.tar.gz
+          retention-days: 90

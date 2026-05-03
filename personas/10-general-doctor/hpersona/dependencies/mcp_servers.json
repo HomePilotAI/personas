@@ -9,7 +9,10 @@
       "auth_type": "bearer",
       "registry_id": "mcp-general-doctor",
       "source": {
-        "type": "registry",
+        "type": "external",
+        "git": "https://github.com/HomePilotAI/personas",
+        "ref": "main",
+        "subdir": "mcp-servers/10-mcp-general-doctor",
         "registry_id": "mcp-general-doctor"
       },
       "transport": "streamable-http",
@@ -28,8 +31,47 @@
         "invoke_endpoint": "/invoke",
         "auth_type": "bearer",
         "min_version": "1.0.0",
-        "min_endpoints": ["/health", "/tools", "/invoke"],
-        "exposed_tools": ["triageSymptoms", "searchMedicalKB"]
+        "min_endpoints": [
+          "/health",
+          "/tools",
+          "/invoke"
+        ],
+        "exposed_tools": [
+          "triageSymptoms",
+          "searchMedicalKB"
+        ]
+      },
+      "install": {
+        "source_type": "external",
+        "source_repo": "https://github.com/HomePilotAI/personas",
+        "source_ref": "main",
+        "source_subdir": "mcp-servers/10-mcp-general-doctor",
+        "runtime": "python",
+        "install_cmd": "python -m pip install -e \".[dev]\"",
+        "start_cmd": "python -m doctor.server --transport streamable-http --host 127.0.0.1 --port {PORT}",
+        "health_url": "http://127.0.0.1:{PORT}/mcp",
+        "default_port": 9110,
+        "transport": "streamable-http",
+        "env_required": [
+          "DOCTOR_MCP_BEARER_TOKEN",
+          "MEDICAL_MCP_BEARER_TOKEN"
+        ],
+        "upstream": {
+          "name": "medical-mcp-toolkit",
+          "source_repo": "https://github.com/ruslanmv/medical-mcp-toolkit",
+          "source_ref": "main",
+          "runtime": "python",
+          "install_cmd": "make install",
+          "start_cmd": "make run-api PORT={PORT}",
+          "health_url": "http://127.0.0.1:{PORT}/health",
+          "default_port": 9090,
+          "env_required": [
+            "MEDICAL_MCP_BEARER_TOKEN"
+          ],
+          "auto_generate_env": [
+            "MEDICAL_MCP_BEARER_TOKEN"
+          ]
+        }
       }
     }
   ]

@@ -17,8 +17,8 @@
     "preview_url": "previews/general-doctor/1.0.0/preview.webp",
     "card_url": "previews/general-doctor/1.0.0/card.json",
     "package_url": "packages/general-doctor/1.0.0/persona.hpersona",
-    "size_bytes": 376858,
+    "size_bytes": 369100,
     "submitted_at": "2026-05-02T06:54:22Z",
-    "sha256": "placeholder-fc450cae3e8e7337ec15e3e5dd67c2922e189a7fad6947c3728c5260006d5e99"
+    "sha256": "4752bdde74cb28d611e9e265bc036ca3089527b474b86d990cdf3b8c5aaf4e78"
   }
 }

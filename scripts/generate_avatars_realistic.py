@@ -163,21 +163,29 @@ def _web_face(persona: dict) -> Image.Image | None:
 
 
 def _crop_to_portrait(face: Image.Image, portrait_size: tuple[int, int]) -> Image.Image:
-    """Center-crop the square face to the portrait aspect (defaults to 4:5)."""
+    """Resize+crop the square face to fill the full portrait aspect.
+
+    The face fills the whole frame — no info card, no stat strip, no
+    name/role text. The frontend gallery renders the persona name + role
+    + class badge in its own UI; we don't want a second copy of that
+    text inside the image, fighting with it visually.
+    """
     pw, ph = portrait_size
     fw, fh = face.size
-    # Resize the face so its width matches the portrait width, maintaining ratio.
-    scale = pw / fw
-    new_w = pw
+    # Cover-fit: scale so the face fills the portrait short axis, then
+    # crop the long axis center-out (slightly top-biased so chins land
+    # below the vertical midline).
+    scale = max(pw / fw, ph / fh)
+    new_w = max(pw, int(fw * scale))
     new_h = max(ph, int(fh * scale))
     face = face.resize((new_w, new_h), Image.Resampling.LANCZOS)
-    # Crop top-biased — faces look best with the chin slightly low.
+    fx = max(0, (new_w - pw) // 2)
     fy = max(0, (new_h - ph) // 3)
-    return face.crop((0, fy, pw, fy + ph))
+    return face.crop((fx, fy, fx + pw, fy + ph))
 
 
 def _round_face_mask(size: tuple[int, int]) -> Image.Image:
-    """Soft-edged elliptical mask so the face vignettes into the background."""
+    """Soft-edged elliptical mask used by the legacy branded composite."""
     mask = Image.new("L", size, 0)
     draw = ImageDraw.Draw(mask)
     pad = int(min(size) * 0.06)
@@ -185,15 +193,33 @@ def _round_face_mask(size: tuple[int, int]) -> Image.Image:
     return mask.filter(ImageFilter.GaussianBlur(radius=int(min(size) * 0.04)))
 
 
-def _compose_branded_avatar(
+def _compose_photo_only(
     persona: dict, face: Image.Image, size: tuple[int, int] = (1024, 1280)
 ) -> Image.Image:
-    """Place ``face`` on top of the existing gradient + glow + info-card layers.
+    """Default: raw face, no overlaid text and no vignette.
 
-    Reuses the helpers in scripts/generate_assets.py so the gallery card
-    keeps the same brand language (palette, mesh gradient, glassmorphism
-    info card, stat pips, vignette, film grain) regardless of the face
-    source. Only the central glyph layer is replaced with the photo.
+    The HomePilot gallery's frontend (gallery.js + card template) already
+    renders persona name, role, class badge and stats next to the image,
+    so duplicating them inside the picture would double up visually. We
+    also leave the photo untouched (no vignette / film grain / glow) so
+    it ships as the original synthetic face — the upstream source is
+    already lit and toned, and the gallery card has its own background
+    that any darkening would fight with. Used when ``AVATAR_STYLE`` is
+    unset or set to ``photo``.
+    """
+    return _crop_to_portrait(face, size).convert("RGB")
+
+
+def _compose_branded(
+    persona: dict, face: Image.Image, size: tuple[int, int] = (1024, 1280)
+) -> Image.Image:
+    """Optional: legacy composite with mesh gradient + info card + stat pips.
+
+    Available behind ``AVATAR_STYLE=branded`` for callers that want the
+    fully-rendered marketing card (e.g. for screenshots, social previews,
+    or environments where the gallery frontend isn't doing its own
+    typography). The 1024×1280 PNG carries the persona name / role /
+    class badge / stat strip baked in.
     """
     palette = [_ga._hex(c) for c in persona["palette"]]
     while len(palette) < 4:
@@ -204,7 +230,7 @@ def _compose_branded_avatar(
     base = _ga._mesh_gradient(size, palette).convert("RGBA")
     base.alpha_composite(_ga._bokeh(size, palette, count=60, seed=hash(persona["id"]) & 0xFFFF))
 
-    # The face occupies the upper 60% of the portrait, leaving room
+    # The face occupies the upper 62% of the portrait, leaving room
     # for the info card the existing pipeline draws below.
     face_h = int(size[1] * 0.62)
     face_w = size[0]
@@ -230,8 +256,25 @@ def _compose_branded_avatar(
     _ga._draw_info_card(persona, base, size)
     _ga._draw_stat_pips(persona, base, size)
 
-    # _vignette + _film_grain expect RGB (return RGB), apply after the convert.
+    # _vignette returns RGB; apply after the convert.
     rgb = base.convert("RGB")
+    return _ga._vignette(rgb, strength=0.18)
+
+
+def _compose(
+    persona: dict, face: Image.Image, size: tuple[int, int] = (1024, 1280)
+) -> Image.Image:
+    """Pick the active composite style based on the AVATAR_STYLE env var."""
+    style = os.getenv("AVATAR_STYLE", "photo").strip().lower()
+    if style in {"branded", "card", "legacy"}:
+        return _compose_branded(persona, face, size)
+    # Default: photo-only.
+    return _compose_photo_only(persona, face, size)
+
+
+def _compose_branded_avatar(persona: dict, face: Image.Image, size=(1024, 1280)) -> Image.Image:
+    """Backwards-compatible alias for any caller that imported the old name."""
+    return _compose(persona, face, size)
     rgb = _ga._vignette(rgb, strength=0.18)
     return rgb
 

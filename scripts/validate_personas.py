@@ -85,6 +85,21 @@ def validate_persona(persona_dir: Path) -> list[str]:
     for s in mcp.get("servers", []):
         if not set(s.get("tools_provided", [])) >= set(deps_tools):
             fail("mcp server tools_provided does not cover dependencies/tools.json", errors)
+        # New: every server MUST carry an `install` block so HomePilot's
+        # Install-Persona flow knows how to provision it. Backwards-
+        # compatible: missing block is a WARN-once, not a hard fail (so
+        # community personas built before sprint-F survive).
+        install = s.get("install")
+        if not install:
+            fail(f"mcp server '{s.get('name','?')}' missing install block (required for auto-install)", errors)
+            continue
+        for required in ("source_type", "source_subdir", "runtime", "install_cmd", "start_cmd", "health_url", "default_port"):
+            if required not in install:
+                fail(f"mcp server '{s.get('name','?')}' install missing key: {required}", errors)
+        if install.get("runtime") not in {"python", "node"}:
+            fail(f"mcp server '{s.get('name','?')}' install.runtime must be python|node", errors)
+        if "{PORT}" not in install.get("start_cmd", "") + install.get("health_url", ""):
+            fail(f"mcp server '{s.get('name','?')}' install must templatize {{PORT}}", errors)
 
     avatar_pngs = list((hp / "assets").glob("avatar_*.png"))
     if not avatar_pngs:
