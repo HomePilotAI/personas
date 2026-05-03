@@ -3,24 +3,34 @@
   "servers": [
     {
       "name": "mcp-general-doctor",
-      "description": "MCP server for the General Doctor persona.",
+      "description": "Python-native MCP safety adapter for the General Doctor persona; calls medical-mcp-toolkit upstream and enforces docs/medical/medical-ai-safety-policy.md.",
       "default_port": 9110,
       "url": "http://localhost:9110",
-      "auth_type": "open",
+      "auth_type": "bearer",
       "registry_id": "mcp-general-doctor",
       "source": {
         "type": "registry",
         "registry_id": "mcp-general-doctor"
       },
-      "transport": "HTTP",
+      "transport": "streamable-http",
       "protocol": "MCP",
       "health_endpoint": "/health",
       "tools_endpoint": "/tools",
+      "mcp_endpoint": "/mcp",
       "tools_provided": [
-        "doctor_general_info",
         "doctor_red_flags",
+        "doctor_general_info",
         "doctor_self_care"
-      ]
+      ],
+      "upstream": {
+        "name": "medical-mcp-toolkit",
+        "url": "http://localhost:9090",
+        "invoke_endpoint": "/invoke",
+        "auth_type": "bearer",
+        "min_version": "1.0.0",
+        "min_endpoints": ["/health", "/tools", "/invoke"],
+        "exposed_tools": ["triageSymptoms", "searchMedicalKB"]
+      }
     }
   ]
 }

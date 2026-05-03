@@ -1,8 +1,10 @@
 {
   "schema_version": 1,
   "tools": [
-    "researcher_search",
-    "researcher_summarize",
-    "researcher_brief"
+    "search_arxiv",
+    "read_paper",
+    "summarize_paper",
+    "compare_papers",
+    "build_literature_brief"
   ]
 }

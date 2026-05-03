@@ -1,0 +1,10 @@
+{
+  "_comment": "Single-server Inspector config for mcp-creator-muse. Use stdio for fast local iteration; flip the type to streamable-http to test the HTTP transport against a running container.",
+  "mcpServers": {
+    "mcp-creator-muse": {
+      "command": "node",
+      "args": ["mcp-servers/01-mcp-creator-muse/src/index.js"],
+      "env": { "MCP_TRANSPORT": "stdio" }
+    }
+  }
+}

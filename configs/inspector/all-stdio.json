@@ -1,0 +1,57 @@
+{
+  "_comment": "MCP Inspector config — every server in stdio mode. Run from the repo root: `npx @modelcontextprotocol/inspector --config configs/inspector/all-stdio.json`. Pending servers point at their unmigrated entrypoints and will not initialize as real MCP until they are converted (see docs/migration/mcp-migration-tracker.md).",
+  "mcpServers": {
+    "mcp-creator-muse": {
+      "command": "node",
+      "args": ["mcp-servers/01-mcp-creator-muse/src/index.js"],
+      "env": { "MCP_TRANSPORT": "stdio" }
+    },
+    "mcp-style-muse": {
+      "command": "node",
+      "args": ["mcp-servers/02-mcp-style-muse/src/index.js"],
+      "env": { "MCP_TRANSPORT": "stdio" }
+    },
+    "mcp-secretary-pro": {
+      "command": "node",
+      "args": ["mcp-servers/03-mcp-secretary-pro/src/index.js"],
+      "env": { "MCP_TRANSPORT": "stdio" }
+    },
+    "mcp-personal-trainer": {
+      "command": "node",
+      "args": ["mcp-servers/05-mcp-personal-trainer/src/index.js"],
+      "env": { "MCP_TRANSPORT": "stdio" }
+    },
+    "mcp-room-stylist": {
+      "command": "node",
+      "args": ["mcp-servers/06-mcp-room-stylist/src/index.js"],
+      "env": { "MCP_TRANSPORT": "stdio" }
+    },
+    "mcp-storyteller": {
+      "command": "node",
+      "args": ["mcp-servers/07-mcp-storyteller/src/index.js"],
+      "env": { "MCP_TRANSPORT": "stdio" }
+    },
+    "mcp-exam-coach": {
+      "command": "node",
+      "args": ["mcp-servers/08-mcp-exam-coach/src/index.js"],
+      "env": { "MCP_TRANSPORT": "stdio" }
+    },
+    "mcp-mindfulness-coach": {
+      "command": "node",
+      "args": ["mcp-servers/09-mcp-mindfulness-coach/src/index.js"],
+      "env": { "MCP_TRANSPORT": "stdio" }
+    },
+    "mcp-researcher": {
+      "command": "python",
+      "args": ["-m", "researcher.server", "--transport", "stdio"],
+      "cwd": "mcp-servers/04-mcp-researcher",
+      "env": { "MCP_RESEARCHER_TRANSPORT": "stdio" }
+    },
+    "mcp-general-doctor": {
+      "command": "python",
+      "args": ["-m", "doctor.server", "--transport", "stdio"],
+      "cwd": "mcp-servers/10-mcp-general-doctor",
+      "env": { "DOCTOR_MCP_TRANSPORT": "stdio" }
+    }
+  }
+}

@@ -2,24 +2,45 @@
   "name": "mcp-personal-trainer",
   "description": "MCP server for the Personal Trainer persona.",
   "default_port": 9105,
-  "protocol": "HTTP",
-  "transport": "HTTP",
+  "protocol": "MCP",
+  "transport": "streamable-http",
   "version": "1.0.0",
   "health_endpoint": "/health",
   "tools_endpoint": "/tools",
+  "mcp_endpoint": "/mcp",
   "auth_type": "open",
+  "runtime": "node",
+  "entrypoint": "node src/index.js",
+  "safety": {
+    "category": "wellness",
+    "non_clinical": true,
+    "escalation_required_for": [
+      "chest_pain",
+      "shortness_of_breath",
+      "dizziness_or_faint",
+      "sharp_or_radiating_pain",
+      "head_injury",
+      "pregnancy_complication"
+    ],
+    "never_does": [
+      "diagnose pain or injury",
+      "prescribe medication or supplements",
+      "recommend extreme calorie deficits",
+      "ignore reported pain to push intensity"
+    ]
+  },
   "tools": [
     {
       "name": "trainer_workout_plan",
-      "description": "Generates a periodised workout plan."
+      "description": "Build a structured workout plan with warm-up, main work (RPE/RIR cues), regression and progression. Honors reported injuries; surfaces medical-escalation flag for red-flag symptoms."
     },
     {
       "name": "trainer_recovery_check",
-      "description": "Assesses recovery readiness."
+      "description": "Score readiness for the next session from sleep, soreness, RPE, and HRV trend; output is a recommendation, not a clinical assessment."
     },
     {
       "name": "trainer_streak",
-      "description": "Tracks training streaks and deloads."
+      "description": "Track and reinforce a training streak with deload guidance every 4-6 weeks; never punishes a planned rest day."
     }
   ]
 }

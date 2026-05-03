@@ -2,20 +2,23 @@
   "name": "mcp-style-muse",
   "description": "MCP server for the Style Muse persona.",
   "default_port": 9102,
-  "protocol": "HTTP",
-  "transport": "HTTP",
+  "protocol": "MCP",
+  "transport": "streamable-http",
   "version": "1.0.0",
   "health_endpoint": "/health",
   "tools_endpoint": "/tools",
+  "mcp_endpoint": "/mcp",
   "auth_type": "open",
+  "runtime": "node",
+  "entrypoint": "node src/index.js",
   "tools": [
     {
       "name": "style_muse_outfit",
-      "description": "Builds an outfit for a stated occasion."
+      "description": "Build a head-to-toe outfit for a given occasion / vibe with palette suggestions and styling notes."
     },
     {
       "name": "style_muse_variant",
-      "description": "Generates before/after style variants."
+      "description": "Generate before/after styling variants of a base look — switch one element at a time so the user can see what changed."
     }
   ]
 }

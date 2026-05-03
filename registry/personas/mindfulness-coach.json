@@ -17,6 +17,7 @@
     "card_url": "previews/mindfulness-coach/1.0.0/card.json",
     "package_url": "packages/mindfulness-coach/1.0.0/persona.hpersona",
     "size_bytes": 423712,
-    "submitted_at": "2026-05-02T06:54:22Z"
+    "submitted_at": "2026-05-02T06:54:22Z",
+    "sha256": "placeholder-a0c567e78bcf6d0d57077ee1b29c005e4091dfa6286aedf1492481feaff122ce"
   }
 }

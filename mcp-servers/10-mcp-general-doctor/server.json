@@ -1,25 +1,74 @@
 {
   "name": "mcp-general-doctor",
-  "description": "MCP server for the General Doctor persona.",
+  "description": "Python-native MCP safety adapter for the General Doctor persona. Calls medical-mcp-toolkit upstream and enforces docs/medical/medical-ai-safety-policy.md (red-flag escalation, output filtering, no PHI, no medication dosing).",
   "default_port": 9110,
-  "protocol": "HTTP",
-  "transport": "HTTP",
+  "protocol": "MCP",
+  "transport": "streamable-http",
+  "supported_transports": ["stdio", "streamable-http", "sse", "legacy-http", "hybrid"],
   "version": "1.0.0",
   "health_endpoint": "/health",
   "tools_endpoint": "/tools",
-  "auth_type": "open",
+  "mcp_endpoint": "/mcp",
+  "legacy_endpoints": {
+    "tools": ["/doctor_red_flags", "/doctor_general_info", "/doctor_self_care"],
+    "context_forge_tools": "/context-forge/tools",
+    "context_forge_call": "/context-forge/call",
+    "available_in_transports": ["legacy-http", "hybrid"]
+  },
+  "auth_type": "bearer",
+  "runtime": "python",
+  "entrypoint": "python -m doctor.server --transport streamable-http",
+  "upstream": {
+    "name": "medical-mcp-toolkit",
+    "url": "http://localhost:9090",
+    "invoke_endpoint": "/invoke",
+    "auth_type": "bearer",
+    "min_version": "1.0.0",
+    "min_endpoints": ["/health", "/tools", "/invoke"]
+  },
+  "safety": {
+    "category": "wellness-medical",
+    "non_clinical": true,
+    "policy_doc": "docs/medical/medical-ai-safety-policy.md",
+    "escalation_required_for": [
+      "chest_pain", "shortness_of_breath", "stroke_symptoms",
+      "severe_bleeding", "loss_of_consciousness", "seizure",
+      "anaphylaxis", "suicidal_ideation", "self_harm_intent",
+      "overdose", "poisoning", "severe_head_injury",
+      "sudden_severe_headache", "sudden_vision_loss",
+      "severe_abdominal_pain", "pregnancy_bleeding",
+      "decreased_fetal_movement", "infant_high_fever",
+      "stiff_neck_with_fever", "severe_dehydration",
+      "blue_lips_cyanosis", "rapidly_worsening_symptoms"
+    ],
+    "never_does": [
+      "diagnose a condition",
+      "prescribe medication",
+      "recommend medication dosing or starts/stops/switches",
+      "expose raw clinical-order language (ECG / troponin / aspirin if not contraindicated / IV …)",
+      "expose patient identifiers or PHI",
+      "schedule appointments without explicit user confirmation"
+    ],
+    "exposed_upstream_tools": ["triageSymptoms", "searchMedicalKB"],
+    "refused_upstream_tools": [
+      "getPatient", "getPatientVitals", "getPatientMedicalProfile",
+      "getPatient360", "getDrugAlternatives", "calcClinicalScores",
+      "getDrugInfo", "getDrugInteractions", "getDrugContraindications",
+      "scheduleAppointment"
+    ]
+  },
   "tools": [
     {
-      "name": "doctor_general_info",
-      "description": "Shares non-diagnostic health information."
+      "name": "doctor_red_flags",
+      "description": "Screen reported symptoms for emergency red flags. Adapter regex runs first; if it fires, returns an escalation envelope and never asks upstream."
     },
     {
-      "name": "doctor_red_flags",
-      "description": "Screens described symptoms for red flags."
+      "name": "doctor_general_info",
+      "description": "Plain-language educational explanation of a health topic via searchMedicalKB. Strips diagnostic / dosing / clinical-order language before returning."
     },
     {
       "name": "doctor_self_care",
-      "description": "Suggests evidence-aligned self-care steps."
+      "description": "General self-care guidance, gated on red-flag triage. Refuses to give self-care if any red flag is present (adapter regex OR upstream emergency acuity)."
     }
   ]
 }

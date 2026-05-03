@@ -1,0 +1,11 @@
+{
+  "_comment": "Single-server Inspector config for the Python FastMCP researcher.",
+  "mcpServers": {
+    "mcp-researcher": {
+      "command": "python",
+      "args": ["-m", "researcher.server", "--transport", "stdio"],
+      "cwd": "mcp-servers/04-mcp-researcher",
+      "env": { "MCP_RESEARCHER_TRANSPORT": "stdio" }
+    }
+  }
+}

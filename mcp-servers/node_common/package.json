@@ -1,0 +1,22 @@
+{
+  "name": "@homepilot/mcp-node-common",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./responses": "./responses.js",
+    "./errors": "./errors.js",
+    "./schemas": "./schemas.js",
+    "./transports": "./transports.js",
+    "./create": "./createMcpServer.js",
+    "./run": "./run.js",
+    "./test-helpers/protocol-harness": "./test-helpers/protocol-harness.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.4",
+    "express": "^4.19.2",
+    "zod": "^3.23.8"
+  }
+}

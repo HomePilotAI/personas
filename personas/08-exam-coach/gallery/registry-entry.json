@@ -17,7 +17,8 @@
     "preview_url": "previews/exam-coach/1.0.0/preview.webp",
     "card_url": "previews/exam-coach/1.0.0/card.json",
     "package_url": "packages/exam-coach/1.0.0/persona.hpersona",
-    "size_bytes": 0,
-    "submitted_at": "2026-05-02T06:54:22Z"
+    "size_bytes": 377048,
+    "submitted_at": "2026-05-02T06:54:22Z",
+    "sha256": "placeholder-defcf34afcada528ade8d51096b2e57d09bedac1126800d22f06ed21e560f4e9"
   }
 }

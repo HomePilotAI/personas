@@ -1,0 +1,75 @@
+# docker/Dockerfile.node-mcp — shared image for the 8 Node MCP servers.
+#
+# Build args:
+#   SERVER_DIR — path under mcp-servers/ to the per-server folder, e.g.
+#                "mcp-servers/01-mcp-creator-muse".
+#   PORT       — Streamable HTTP port the service listens on.
+#
+# The image installs every workspace package once (npm install at the
+# repo root resolves @homepilot/mcp-node-common via npm workspaces) so a
+# single docker build of this Dockerfile produces an image that can run
+# any of the 8 Node MCP servers — the docker-compose service picks
+# which one via the `command:` line.
+
+FROM node:22-slim AS base
+
+ENV NODE_ENV=production \
+    NPM_CONFIG_FUND=false \
+    NPM_CONFIG_AUDIT=false \
+    NPM_CONFIG_UPDATE_NOTIFIER=false
+
+WORKDIR /app
+
+RUN apt-get update -qq \
+ && apt-get install -y --no-install-recommends ca-certificates curl \
+ && rm -rf /var/lib/apt/lists/*
+
+# Workspace install. Copy package.json + lockfile + workspace manifests
+# first so a code-only change does not bust the npm install layer.
+COPY package.json package-lock.json* ./
+COPY mcp-servers/node_common/package.json mcp-servers/node_common/
+COPY mcp-servers/01-mcp-creator-muse/package.json mcp-servers/01-mcp-creator-muse/
+COPY mcp-servers/02-mcp-style-muse/package.json mcp-servers/02-mcp-style-muse/
+COPY mcp-servers/03-mcp-secretary-pro/package.json mcp-servers/03-mcp-secretary-pro/
+COPY mcp-servers/05-mcp-personal-trainer/package.json mcp-servers/05-mcp-personal-trainer/
+COPY mcp-servers/06-mcp-room-stylist/package.json mcp-servers/06-mcp-room-stylist/
+COPY mcp-servers/07-mcp-storyteller/package.json mcp-servers/07-mcp-storyteller/
+COPY mcp-servers/08-mcp-exam-coach/package.json mcp-servers/08-mcp-exam-coach/
+COPY mcp-servers/09-mcp-mindfulness-coach/package.json mcp-servers/09-mcp-mindfulness-coach/
+
+RUN npm install --omit=dev --workspaces --include-workspace-root && npm cache clean --force
+
+# Source goes in last so non-package-json edits hit only this layer.
+COPY mcp-servers/node_common/ mcp-servers/node_common/
+COPY mcp-servers/01-mcp-creator-muse/ mcp-servers/01-mcp-creator-muse/
+COPY mcp-servers/02-mcp-style-muse/ mcp-servers/02-mcp-style-muse/
+COPY mcp-servers/03-mcp-secretary-pro/ mcp-servers/03-mcp-secretary-pro/
+COPY mcp-servers/05-mcp-personal-trainer/ mcp-servers/05-mcp-personal-trainer/
+COPY mcp-servers/06-mcp-room-stylist/ mcp-servers/06-mcp-room-stylist/
+COPY mcp-servers/07-mcp-storyteller/ mcp-servers/07-mcp-storyteller/
+COPY mcp-servers/08-mcp-exam-coach/ mcp-servers/08-mcp-exam-coach/
+COPY mcp-servers/09-mcp-mindfulness-coach/ mcp-servers/09-mcp-mindfulness-coach/
+
+# Non-root user.
+RUN useradd --create-home --uid 10001 mcp \
+ && chown -R mcp:mcp /app
+USER mcp
+
+# Defaults; per-service compose entries override PORT via env.
+ENV MCP_TRANSPORT=streamable-http \
+    MCP_HOST=0.0.0.0 \
+    MCP_PORT=9101
+
+EXPOSE 9101
+
+# Liveness probe: every Node MCP server replies on POST /mcp. We don't
+# care about the body — connectivity is what we're checking.
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+    CMD curl --fail --silent --show-error \
+        "http://127.0.0.1:${MCP_PORT}/mcp" \
+        -H "Accept: text/event-stream" \
+        -X POST -d '{}' >/dev/null || exit 1
+
+# Each compose service overrides the command to point at its own
+# src/index.js. The default keeps the image bootable on its own.
+CMD ["node", "mcp-servers/01-mcp-creator-muse/src/index.js"]

@@ -21,8 +21,8 @@
   },
   "capability_summary": {
     "personality_tools": [
-      "doctor_general_info",
       "doctor_red_flags",
+      "doctor_general_info",
       "doctor_self_care"
     ],
     "capabilities": [

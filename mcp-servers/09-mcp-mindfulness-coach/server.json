@@ -2,24 +2,38 @@
   "name": "mcp-mindfulness-coach",
   "description": "MCP server for the Mindfulness Coach persona.",
   "default_port": 9109,
-  "protocol": "HTTP",
-  "transport": "HTTP",
+  "protocol": "MCP",
+  "transport": "streamable-http",
   "version": "1.0.0",
   "health_endpoint": "/health",
   "tools_endpoint": "/tools",
+  "mcp_endpoint": "/mcp",
   "auth_type": "open",
+  "runtime": "node",
+  "entrypoint": "node src/index.js",
+  "safety": {
+    "category": "wellness",
+    "non_clinical": true,
+    "escalation_required_for": [
+      "suicidal_thoughts",
+      "self_harm",
+      "panic_attack",
+      "persistent_distress",
+      "trauma_recall"
+    ]
+  },
   "tools": [
     {
       "name": "mindfulness_meditation",
-      "description": "Generates a guided meditation script."
+      "description": "Generate a guided meditation script of N minutes with paced breath cues. Always non-clinical; defers to a licensed professional for persistent distress."
     },
     {
       "name": "mindfulness_grounding",
-      "description": "Leads a 5-4-3-2-1 grounding exercise."
+      "description": "Lead a 5-4-3-2-1 sensory grounding exercise. If the user mentions crisis-level distress, the response replaces the script with an escalation message."
     },
     {
       "name": "mindfulness_focus",
-      "description": "Runs a short focus / breathing session."
+      "description": "Run a short focus / breath-led micro-session (box breath or 4-7-8) to reset attention before a task."
     }
   ]
 }

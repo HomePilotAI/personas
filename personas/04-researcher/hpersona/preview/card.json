@@ -21,9 +21,11 @@
     "thorough"
   ],
   "tools": [
-    "researcher_search",
-    "researcher_summarize",
-    "researcher_brief"
+    "search_arxiv",
+    "read_paper",
+    "summarize_paper",
+    "compare_papers",
+    "build_literature_brief"
   ],
   "backstory": "PhD-grade rigor with a librarian's patience. Researcher does not paraphrase what it has not read; every claim ships with a citation, and every uncertainty is named.",
   "tags": [
