@@ -665,3 +665,6 @@ Apache License 2.0. See [`LICENSE`](LICENSE).
 - [`ArXiv-Chatter-WatsonX`](https://github.com/ruslanmv/ArXiv-Chatter-WatsonX)
   and [`Chat-Researcher`](https://github.com/ruslanmv/Chat-Researcher)
   — references for the Researcher persona's arXiv + RAG pipeline.
+
+---
+**Connect a Coder persona to GitPilot** — the [`@homepilot/gitpilot-connect`](./packages/gitpilot-connect/) wizard attaches a Coder persona to a running [GitPilot](https://github.com/ruslanmv/gitpilot) MCP server in seven steps; tokens stay in RAM, persona file is generated locally.
