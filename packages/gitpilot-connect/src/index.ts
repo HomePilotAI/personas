@@ -18,25 +18,25 @@
 //
 // See README.md for the architectural overview.
 
-export { GitPilotClient, ConnectionTestResult } from './client.js';
+export { GitPilotClient } from './client.js';
+export type { ConnectionTestResult } from './client.js';
 export {
-  WizardState,
-  WizardStep,
   WIZARD_STEPS,
   emptyWizardState,
   loadPartial,
   savePartial,
   clearPartial
 } from './state.js';
+export type { WizardState, WizardStep } from './state.js';
 export {
-  ConnectionConfig,
   ConnectionConfigSchema,
-  PermissionScope,
   PermissionScopes,
-  WorkspaceTarget,
   WorkspaceTargetSchema
 } from './types.js';
-export {
-  buildPersonaArtefacts,
-  PersonaArtefacts
-} from './persona-writer.js';
+export type {
+  ConnectionConfig,
+  PermissionScope,
+  WorkspaceTarget
+} from './types.js';
+export { buildPersonaArtefacts } from './persona-writer.js';
+export type { PersonaArtefacts } from './persona-writer.js';

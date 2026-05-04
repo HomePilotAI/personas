@@ -17,7 +17,7 @@
 //     savePartial(). Persona-writer is the only path that may persist
 //     a token, and only via the keychain branch.
 
-import { ConnectionConfig, PermissionScope, WorkspaceTarget } from './types.js';
+import type { PermissionScope, WorkspaceTarget } from './types.js';
 
 export const WIZARD_STEPS = [
   'welcome',
@@ -88,14 +88,18 @@ export function emptyWizardState(): WizardState {
 
 // ---------------------------------------------------------------------------
 // Pluggable storage
+//
+// We name the interface ``WizardStorage`` rather than ``Storage`` to
+// avoid colliding with the DOM lib's built-in ``Storage`` (whose
+// methods are getItem/setItem/removeItem, not our get/set/remove).
 // ---------------------------------------------------------------------------
-export interface Storage {
+export interface WizardStorage {
   get(key: string): string | null;
   set(key: string, value: string): void;
   remove(key: string): void;
 }
 
-class MemoryStorage implements Storage {
+class MemoryStorage implements WizardStorage {
   private readonly store = new Map<string, string>();
   get(key: string): string | null {
     return this.store.get(key) ?? null;
@@ -108,16 +112,31 @@ class MemoryStorage implements Storage {
   }
 }
 
-function defaultStorage(): Storage {
-  if (typeof globalThis !== 'undefined' && (globalThis as { localStorage?: Storage }).localStorage) {
-    return (globalThis as { localStorage: Storage }).localStorage;
+class BrowserLocalStorage implements WizardStorage {
+  // Lightweight adapter from DOM Storage (getItem/setItem) to our shape.
+  constructor(private readonly raw: globalThis.Storage) {}
+  get(key: string): string | null {
+    return this.raw.getItem(key);
+  }
+  set(key: string, value: string): void {
+    this.raw.setItem(key, value);
+  }
+  remove(key: string): void {
+    this.raw.removeItem(key);
+  }
+}
+
+function defaultStorage(): WizardStorage {
+  const g = globalThis as { localStorage?: globalThis.Storage };
+  if (typeof g !== 'undefined' && g.localStorage) {
+    return new BrowserLocalStorage(g.localStorage);
   }
   return new MemoryStorage();
 }
 
-let storage: Storage = defaultStorage();
+let storage: WizardStorage = defaultStorage();
 
-export function setStorage(s: Storage): void {
+export function setStorage(s: WizardStorage): void {
   storage = s;
 }
 
