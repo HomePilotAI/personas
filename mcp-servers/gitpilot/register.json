@@ -1,0 +1,39 @@
+{
+  "name": "gitpilot-mcp-server",
+  "version": "0.1.0",
+  "description": "GitPilot exposed as an MCP server. The HomePilot Coder persona uses this entry to know how to attach to a running GitPilot instance.",
+  "transport": "streamable-http",
+  "endpoint": "http://localhost:8000/mcp-server/mcp",
+  "protocol": "mcp/1.0",
+  "auth": {
+    "type": "bearer",
+    "env": "GITPILOT_MCP_SERVER_TOKEN"
+  },
+  "tags": [
+    "gitpilot",
+    "code-generation",
+    "agentic",
+    "github",
+    "coder"
+  ],
+  "tool_policy": {
+    "default": "allow",
+    "warn": [
+      "gitpilot.run_skill",
+      "gitpilot.create_pr"
+    ]
+  },
+  "healthcheck": {
+    "url": "http://localhost:8000/mcp-server/mcp/healthz",
+    "interval_seconds": 30
+  },
+  "metadata": {
+    "upstream": "https://github.com/ruslanmv/gitpilot",
+    "wizard_compatible": true,
+    "persona_kind": "coder",
+    "setup": {
+      "package": "@homepilot/gitpilot-connect",
+      "entry": "Wizard"
+    }
+  }
+}
