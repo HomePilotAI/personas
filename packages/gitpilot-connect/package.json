@@ -1,0 +1,53 @@
+{
+  "name": "@homepilot/gitpilot-connect",
+  "version": "0.1.0",
+  "description": "Setup wizard + runtime client that connects HomePilot personas to a GitPilot MCP server. Strictly additive: no edits to existing personas, no schema changes.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "src",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "echo 'lint TBD'"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "peerDependenciesMeta": {
+    "react": { "optional": true },
+    "react-dom": { "optional": true }
+  },
+  "dependencies": {
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@testing-library/react": "^16.0.1",
+    "@testing-library/user-event": "^14.5.2",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitest/coverage-v8": "^2.1.0",
+    "jsdom": "^25.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "typescript": "^5.6.2",
+    "vitest": "^2.1.0"
+  },
+  "keywords": [
+    "homepilot",
+    "gitpilot",
+    "mcp",
+    "wizard",
+    "persona",
+    "coder"
+  ],
+  "license": "Apache-2.0"
+}
